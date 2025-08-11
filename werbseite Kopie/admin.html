@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Projecta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="images/logo.png" alt="Projecta Logo" class="logo">
+        <span class="brand-text">Projecta</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="container spaced admin-page">
+    <section id="login-section">
+      <h1>Admin Login</h1>
+      <form id="login-form" class="admin-form">
+        <label for="admin-email">E-Mail</label>
+        <input id="admin-email" type="email" required>
+        <label for="admin-pass">Passwort</label>
+        <input id="admin-pass" type="password" required>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <p id="login-msg" class="muted"></p>
+      </form>
+      <p class="muted">Erster Start? Es gibt ein Default-Admin-Konto (E-Mail: <code>admin@projecta.local</code>, Passwort: <code>admin123</code>). Bitte nach Login Passwort ändern.</p>
+    </section>
+
+    <section id="dashboard" class="hidden">
+      <div class="admin-header">
+        <h1>Admin Dashboard</h1>
+        <div>
+          <button id="logout" class="btn btn-outline">Logout</button>
+        </div>
+      </div>
+
+      <div class="admin-grid">
+        <div class="card">
+          <h2>Produkte</h2>
+          <button id="new-product" class="btn">Neues Produkt</button>
+          <div id="product-list"></div>
+          <div class="muted small">Du kannst Bilder als Datei auswählen — sie werden als Data-URL gespeichert.</div>
+        </div>
+
+        <div class="card">
+          <h2>Inhalte</h2>
+          <label for="site-mission">Mission (Startseite / About)</label>
+          <textarea id="site-mission" rows="6"></textarea>
+          <button id="save-content" class="btn btn-primary">Speichern</button>
+        </div>
+
+        <div class="card">
+          <h2>Datenverwaltung</h2>
+          <button id="export-data" class="btn">Exportiere JSON</button>
+          <input id="import-file" type="file" accept="application/json">
+          <p id="data-msg" class="muted"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>Admin — Projecta</div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
