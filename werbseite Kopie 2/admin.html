@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <section id="login-section">
+    <h2>🔐 Admin Login</h2>
+    <form id="login-form">
+      <input type="email" id="admin-email" placeholder="Admin E-Mail" required />
+      <input type="password" id="admin-pass" placeholder="Passwort" required />
+      <button type="submit">Login</button>
+    </form>
+    <p id="login-msg"></p>
+  </section>
+
+  <section id="dashboard" class="hidden">
+    <h2>🛠️ Admin Dashboard</h2>
+    <div id="product-editor">
+      <h3>Produkt bearbeiten</h3>
+      <input type="text" id="product-title" placeholder="Titel" />
+      <input type="number" id="product-price" placeholder="Preis (€)" />
+      <input type="text" id="product-image" placeholder="Bild-URL" />
+      <button id="save-product">Speichern</button>
+    </div>
+    <button id="logout">Logout</button>
+  </section>
+
+  <script src="js/script.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

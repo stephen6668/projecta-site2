@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warenkorb</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --bg-light: #f9f9f9;
+      --accent: #0077cc;
+      --radius: 12px;
+    }
+
+    .product-card {
+      display: flex;
+      gap: 2rem;
+      background: var(--bg-light);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .product-card img {
+      max-width: 160px;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .product-card h3 {
+      margin-top: 0;
+      font-family: "Playfair Display", serif;
+      color: var(--accent);
+    }
+
+    .product-card p {
+      margin: 0.3rem 0;
+    }
+
+    .quantity-input {
+      width: 60px;
+      padding: 0.4rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-left: 0.5rem;
+    }
+
+    .remove-btn {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    .remove-btn:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .cart-summary {
+      font-size: 1.3rem;
+      font-weight: 600;
+      text-align: right;
+      margin-top: 2rem;
+      color: var(--accent);
+    }
+
+    .cart-notification {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #F2ECE4;
+      border: 2px solid #C9A86A;
+      padding: 1.5rem 2rem;
+      border-radius: 16px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+      z-index: 1000;
+      max-width: 320px;
+      font-size: 1rem;
+      color: #2E2E2E;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="images/logo.png" alt="Logo" class="logo" />
+        <span class="brand-text">Projecta</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="product.html">Produkt</a>
+        <a href="cart.html" class="active">Warenkorb</a>
+        <a href="about.html">Über Uns</a>
+        <a href="contact.html">Kontakt</a>
+        <a href="future-products.html">Zukünftige Produkte</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hauptinhalt -->
+  <main class="container spaced">
+    <section>
+      <h1 class="section-title">🛍️ Dein Warenkorb</h1>
+      <div id="cart-items"></div>
+      <div id="cart-summary" class="cart-summary"></div>
+      <div id="checkout-button-container"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Projecta — Alle Rechte vorbehalten.</div>
+    </div>
+  </footer>
+
+  <!-- Benachrichtigung beim Hinzufügen -->
+  <div id="cart-notification" class="cart-notification" style="display: none;">
+    <p>✅ Sie haben <strong>dieses Produkt</strong> zu Ihrem Warenkorb hinzugefügt.</p>
+    <div class="btn-group">
+      <button id="continue-shopping" class="btn btn-outline">Weiter shoppen</button>
+      <a href="cart.html" class="btn btn-primary">Zum Warenkorb</a>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="cart.js"></script>
+</body>
+</html>

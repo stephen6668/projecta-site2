@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bestellung — Projecta</title>
+  <meta name="description" content="Schließe deine Bestellung bei Projecta ab – sicher und einfach." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      padding: 2rem;
+    }
+
+    .checkout-form {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+
+    fieldset {
+      border: none;
+      margin-bottom: 2rem;
+    }
+
+    legend {
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75em 1.5em;
+      font-size: 1rem;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: #000;
+      color: white;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #333;
+    }
+
+    .btn-success:hover {
+      background-color: #218838;
+    }
+
+    .stripe-test-payment {
+      margin-top: 3rem;
+      padding: 1.5rem;
+      background-color: #f5f0e6;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .stripe-test-payment h2 {
+      margin-top: 0;
+    }
+
+    footer {
+      margin-top: 4rem;
+      background: #222;
+      color: #fff;
+      padding: 2rem 0;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem;
+    }
+
+    .footer-links a {
+      color: #fff;
+      margin-left: 1rem;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Zur Startseite">
+        <img src="images/Logo.png" alt="Projecta Logo" class="logo">
+        <span class="brand-text">Projecta</span>
+      </a>
+      <nav class="nav" role="navigation" aria-label="Hauptnavigation">
+        <a href="index.html">Home</a>
+        <a href="product.html">Produkt</a>
+        <a href="about.html">Über Uns</a>
+        <a href="contact.html">Kontakt</a>
+        <a href="admin.html" class="admin-link">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container spaced">
+    <h1>Bestellung abschließen</h1>
+    <p>Bitte fülle die folgenden Felder aus, um deine Bestellung zu übermitteln.</p>
+
+    <form action="https://formspree.io/f/xyzpogpd" method="POST" class="checkout-form" aria-label="Bestellformular">
+      <fieldset>
+        <legend>Persönliche Informationen</legend>
+        <label for="name">Vollständiger Name *</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">E-Mail-Adresse *</label>
+        <input type="email" id="email" name="email" required />
+      </fieldset>
+
+      <fieldset>
+        <legend>Lieferadresse</legend>
+        <label for="street">Straße und Hausnummer *</label>
+        <input type="text" id="street" name="street" required />
+
+        <label for="zip">Postleitzahl *</label>
+        <input type="text" id="zip" name="zip" required />
+
+        <label for="city">Stadt *</label>
+        <input type="text" id="city" name="city" required />
+
+        <label for="country">Land *</label>
+        <input type="text" id="country" name="country" required />
+      </fieldset>
+
+      <fieldset>
+        <legend>Zahlungsmethode</legend>
+        <label for="payment">Zahlungsart *</label>
+        <select id="payment" name="payment" required>
+          <option value="">Bitte wählen</option>
+          <option value="Kreditkarte">💳 Kreditkarte</option>
+          <option value="PayPal">🅿️ PayPal</option>
+          <option value="Banküberweisung">🏦 Banküberweisung</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>Weitere Angaben</legend>
+        <label for="message">Anmerkung zur Bestellung (optional)</label>
+        <textarea id="message" name="message" rows="2" placeholder="Z. B. Lieferhinweise oder Geschenkverpackung"></textarea>
+      </fieldset>
+
+      <!-- 🛒 Warenkorb-Zusammenfassung -->
+      <input type="hidden" name="cart_summary" id="cart-summary-field" />
+
+      <!-- Formspree Optionen -->
+      <input type="hidden" name="_subject" value="Neue Bestellung von Projecta">
+      <input type="hidden" name="_next" value="https://deine-seite.de/danke.html">
+
+      <button type="submit" class="btn btn-primary">✅ Bestellung abschicken</button>
+    </form>
+
+    <section class="stripe-test-payment" aria-label="Testzahlung mit Stripe">
+      <h2>🔍 Testzahlung mit Stripe</h2>
+      <p>Du möchtest den Zahlungsprozess testen? Klicke auf den Button unten, um eine Testzahlung über Stripe durchzuführen. Es wird keine echte Bestellung ausgelöst.</p>
+      <a href="https://buy.stripe.com/test_8x2bJ00Om2Cz5acecb63K00"
+         class="btn btn-success"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="Stripe-Testzahlung starten">
+        🧪 Testzahlung starten
+      </a>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Projecta — Alle Rechte vorbehalten.</div>
+      <div class="footer-links">
+        <a href="about.html">Über Uns</a>
+        <a href="contact.html">Kontakt</a>
+        <a href="admin.html">Admin</a>
+        <a href="future-products.html">Zukünftige Produkte</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const cart = JSON.parse(localStorage.getItem("projecta_cart") || "[]");
+
+    function generateCartSummary(cart) {
+      if (cart.length === 0) return "Warenkorb ist leer.";
+
+      return cart.map(item => {
+        return `${item.name} – ${item.quantity}× €${item.price.toFixed(2)} = €${(item.quantity * item.price).toFixed(2)}
+Form: ${item.diamondForm}, Farbe: ${item.diamondColor}, Armband: ${item.bandColor}${item.engraving ? ", Gravur: " + item.engraving : ""}`;
+      }).join("\n\n");
+    }
+
+    const form = document.querySelector(".checkout-form");
+    const cartSummaryField = document.getElementById("cart-summary-field");
+
+    form.addEventListener("submit", function (e) {
+      cartSummaryField.value = generateCartSummary(cart);
+      localStorage.removeItem("projecta_cart"); // 🧹 Warenkorb leeren
+    });
+  </script
