@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Widerrufsbelehrung – LUXE NOIR</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Josefin+Sans:wght@100;300;400&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#C9A84C;--black:#0A0A0A;--white:#F5F0E8;--gray:#888;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--black);color:var(--white);font-family:'Josefin Sans',sans-serif;font-weight:300;min-height:100vh;}
+header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,0.97);border-bottom:1px solid rgba(201,168,76,0.3);padding:0 2rem;height:70px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(10px);}
+.logo-area{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.logo-img{width:44px;height:44px;object-fit:contain;}
+.logo-placeholder{width:44px;height:44px;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold);font-style:italic;}
+.logo-text{font-family:'Cormorant Garamond',serif;font-size:1.5rem;letter-spacing:6px;color:var(--gold);font-weight:300;}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:5px;background:none;border:none;}
+.hamburger span{display:block;width:26px;height:1.5px;background:var(--gold);transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.nav-menu{position:fixed;top:70px;left:0;right:0;bottom:0;background:rgba(10,10,10,0.99);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;transform:translateX(-100%);transition:transform .5s cubic-bezier(.77,0,.18,1);}
+.nav-menu.open{transform:translateX(0);}
+.nav-menu a{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:var(--white);text-decoration:none;letter-spacing:8px;transition:color .3s;}
+.nav-menu a:hover{color:var(--gold);}
+.nav-divider{width:40px;height:1px;background:rgba(201,168,76,0.3);}
+.breadcrumb{padding:90px 3rem 0;font-size:.6rem;letter-spacing:3px;color:var(--gray);}
+.breadcrumb a{color:var(--gray);text-decoration:none;}
+.breadcrumb a:hover{color:var(--gold);}
+.breadcrumb span{color:var(--gold);margin:0 8px;}
+.legal-container{max-width:800px;margin:0 auto;padding:3rem 2rem 6rem;}
+.legal-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,2.5rem);letter-spacing:5px;font-weight:300;color:var(--gold);margin-bottom:3rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(201,168,76,0.2);}
+.legal-section{margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,0.05);}
+.legal-section:last-child{border-bottom:none;}
+.legal-section h3{font-size:.65rem;letter-spacing:4px;color:var(--gold);margin-bottom:1.2rem;}
+.legal-section p,.legal-section ul{font-size:.8rem;line-height:1.9;color:#aaa;letter-spacing:.5px;}
+.legal-section ul{padding-left:1.5rem;}
+.legal-section ul li{margin-bottom:.6rem;}
+.widerruf-box{border:1px solid rgba(201,168,76,0.3);padding:2rem;background:rgba(201,168,76,0.03);margin:2rem 0;}
+.widerruf-box p{font-size:.75rem;line-height:1.8;color:#bbb;}
+footer{border-top:1px solid rgba(201,168,76,0.2);padding:3rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;}
+.footer-copy{font-size:.6rem;letter-spacing:1px;color:var(--gray);}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.footer-links a{font-size:.6rem;letter-spacing:1px;color:var(--gray);text-decoration:none;transition:color .3s;}
+.footer-links a:hover{color:var(--gold);}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo-area" href="index.html">
+    <img src="logo.png" alt="LUXE NOIR" class="logo-img" onerror="this.style.display='none';document.getElementById('lf').style.display='flex'">
+    <div class="logo-placeholder" id="lf" style="display:none">L</div>
+    <span class="logo-text">LUXE NOIR</span>
+  </a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<nav class="nav-menu" id="navMenu">
+  <a href="index.html">HOME</a><div class="nav-divider"></div>
+  <a href="index.html">KOLLEKTION</a><div class="nav-divider"></div>
+  <a href="cart.html">WARENKORB</a><div class="nav-divider"></div>
+  <a href="impressum.html">IMPRESSUM</a>
+</nav>
+<div class="breadcrumb"><a href="index.html">HOME</a><span>›</span>WIDERRUF</div>
+<div class="legal-container">
+  <h1 class="legal-title">WIDERRUFS­BELEHRUNG</h1>
+
+  <div class="legal-section">
+    <h3>Widerrufsrecht</h3>
+    <p>Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen.</p>
+    <p style="margin-top:1rem">Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die letzte Ware in Besitz genommen haben bzw. hat.</p>
+  </div>
+
+  <div class="legal-section">
+    <h3>Ausübung des Widerrufsrechts</h3>
+    <p>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns (LUXE NOIR GmbH, Musterstraße 1, 10115 Berlin, E-Mail: widerruf@luxenoir.de, Tel.: +49 30 123456789) mittels einer eindeutigen Erklärung (z. B. ein per Post versandter Brief oder eine E-Mail) über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren.</p>
+    <p style="margin-top:1rem">Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist absenden.</p>
+  </div>
+
+  <div class="legal-section">
+    <h3>Muster-Widerrufsformular</h3>
+    <div class="widerruf-box">
+      <p>
+        <strong style="color:var(--gold);font-size:.6rem;letter-spacing:3px;">MUSTER-WIDERRUFSFORMULAR</strong><br><br>
+        An: LUXE NOIR GmbH, Musterstraße 1, 10115 Berlin, widerruf@luxenoir.de<br><br>
+        Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*) abgeschlossenen Vertrag über den Kauf der folgenden Waren (*):<br><br>
+        Bestellt am (*) / erhalten am (*):<br>
+        Name des/der Verbraucher(s):<br>
+        Anschrift des/der Verbraucher(s):<br>
+        Datum:<br><br>
+        (*) Unzutreffendes streichen.
+      </p>
+    </div>
+  </div>
+
+  <div class="legal-section">
+    <h3>Folgen des Widerrufs</h3>
+    <p>Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen, die wir von Ihnen erhalten haben, einschließlich der Lieferkosten (mit Ausnahme der zusätzlichen Kosten, die sich daraus ergeben, dass Sie eine andere Art der Lieferung als die von uns angebotene, günstigste Standardlieferung gewählt haben), unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag zurückzuzahlen, an dem die Mitteilung über Ihren Widerruf dieses Vertrags bei uns eingegangen ist.</p>
+    <p style="margin-top:1rem">Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel, das Sie bei der ursprünglichen Transaktion eingesetzt haben, es sei denn, mit Ihnen wurde ausdrücklich etwas anderes vereinbart; in keinem Fall werden Ihnen wegen dieser Rückzahlung Entgelte berechnet.</p>
+    <p style="margin-top:1rem">Wir können die Rückzahlung verweigern, bis wir die Waren wieder zurückerhalten haben oder bis Sie den Nachweis erbracht haben, dass Sie die Waren zurückgesandt haben, je nachdem, welches der frühere Zeitpunkt ist.</p>
+  </div>
+
+  <div class="legal-section">
+    <h3>Rücksendung</h3>
+    <p>Sie haben die Waren unverzüglich und in jedem Fall spätestens binnen vierzehn Tagen ab dem Tag, an dem Sie uns über den Widerruf dieses Vertrags unterrichten, an uns zurückzusenden oder zu übergeben. Die Frist ist gewahrt, wenn Sie die Waren vor Ablauf der Frist von vierzehn Tagen absenden.</p>
+    <p style="margin-top:1rem">Sie tragen die unmittelbaren Kosten der Rücksendung der Waren.</p>
+    <p style="margin-top:1rem">Sie müssen für einen etwaigen Wertverlust der Waren nur aufkommen, wenn dieser Wertverlust auf einen zur Prüfung der Beschaffenheit, Eigenschaften und Funktionsweise der Waren nicht notwendigen Umgang mit ihnen zurückzuführen ist.</p>
+  </div>
+
+  <div class="legal-section">
+    <h3>Ausschluss des Widerrufsrechts</h3>
+    <ul>
+      <li>Bei Waren, die nach Kundenspezifikation angefertigt wurden</li>
+      <li>Bei versiegelten Waren, die aus Gründen des Gesundheitsschutzes oder der Hygiene nicht zur Rückgabe geeignet sind, sofern ihre Versiegelung nach der Lieferung entfernt wurde</li>
+      <li>Bei Waren, die nach der Lieferung aufgrund ihrer Beschaffenheit untrennbar mit anderen Gütern vermischt wurden</li>
+    </ul>
+  </div>
+</div>
+<footer>
+  <span class="footer-copy">© 2025 LUXE NOIR GmbH. Alle Rechte vorbehalten.</span>
+  <div class="footer-links">
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="agb.html">AGB</a>
+    <a href="widerruf.html">Widerruf</a>
+  </div>
+</footer>
+<script>
+let menuOpen=false;
+function toggleMenu(){menuOpen=!menuOpen;document.getElementById('hamburger').classList.toggle('open',menuOpen);document.getElementById('navMenu').classList.toggle('open',menuOpen);}
+</script>
+</body>
+</html>
