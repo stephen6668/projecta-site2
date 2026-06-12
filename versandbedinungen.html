@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Versandbedingungen – Chevalier &amp; Roth</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Josefin+Sans:wght@100;300;400&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#AE9666;--gold-light:#C8AE88;--black:#0A0A0A;--black-card:#1A1A1A;--white:#F5F0E8;--gray:#888;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--black);color:var(--white);font-family:'Josefin Sans',sans-serif;font-weight:300;min-height:100vh;}
+header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,0.97);border-bottom:1px solid rgba(174,150,102,0.3);padding:0 2rem;height:70px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(10px);}
+.logo-area{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.logo-img{height:44px;width:auto;object-fit:contain;}
+.logo-placeholder{width:44px;height:44px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold);font-style:italic;}
+.logo-text{font-family:'Cormorant Garamond',serif;font-size:1.3rem;letter-spacing:3px;color:var(--gold);font-weight:300;}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:5px;background:none;border:none;}
+.hamburger span{display:block;width:26px;height:1.5px;background:var(--gold);transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.nav-menu{position:fixed;top:70px;left:0;right:0;bottom:0;background:rgba(10,10,10,0.99);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transform:translateX(-100%);transition:transform .5s cubic-bezier(.77,0,.18,1);}
+.nav-menu.open{transform:translateX(0);}
+.nav-menu a{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--white);text-decoration:none;letter-spacing:8px;transition:color .3s;}
+.nav-menu a:hover{color:var(--gold);}
+.breadcrumb{padding:90px 3rem 0;font-size:.6rem;letter-spacing:3px;color:var(--gray);}
+.breadcrumb a{color:var(--gray);text-decoration:none;}
+.breadcrumb a:hover{color:var(--gold);}
+.breadcrumb span{color:var(--gold);margin:0 8px;}
+.legal-container{max-width:800px;margin:0 auto;padding:3rem 2rem 6rem;}
+.legal-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:5px;font-weight:300;color:var(--gold);margin-bottom:3rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(174,150,102,0.2);}
+.legal-section{margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,0.05);}
+.legal-section:last-child{border-bottom:none;}
+.legal-section h3{font-size:.65rem;letter-spacing:4px;color:var(--gold);margin-bottom:1.2rem;text-transform:uppercase;}
+.legal-section p,.legal-section ul{font-size:.8rem;line-height:1.9;color:#aaa;letter-spacing:.5px;}
+.legal-section ul{padding-left:1.5rem;}
+.legal-section ul li{margin-bottom:.6rem;}
+.shipping-table{width:100%;border-collapse:collapse;margin-top:1rem;}
+.shipping-table th{font-size:.58rem;letter-spacing:3px;color:var(--gold);padding:12px 16px;text-align:left;border-bottom:1px solid rgba(174,150,102,0.3);}
+.shipping-table td{padding:12px 16px;font-size:.78rem;letter-spacing:.5px;border-bottom:1px solid rgba(255,255,255,0.05);color:#aaa;}
+.shipping-table td:last-child{color:var(--white);}
+.free-badge{color:#4CAF50;font-size:.65rem;letter-spacing:1px;}
+footer{border-top:1px solid rgba(174,150,102,0.2);padding:3rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;}
+.footer-copy{font-size:.6rem;letter-spacing:1px;color:var(--gray);}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.footer-links a{font-size:.6rem;letter-spacing:1px;color:var(--gray);text-decoration:none;transition:color .3s;}
+.footer-links a:hover{color:var(--gold);}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo-area" href="index.html">
+    <img src="logo.png" alt="Chevalier &amp; Roth" class="logo-img" onerror="this.style.display='none';document.getElementById('lf').style.display='flex'">
+    <div class="logo-placeholder" id="lf" style="display:none">C</div>
+    <span class="logo-text">Chevalier &amp; Roth</span>
+  </a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</header>
+<nav class="nav-menu" id="navMenu">
+  <a href="index.html">HOME</a>
+  <a href="cart.html">WARENKORB</a>
+  <a href="impressum.html">IMPRESSUM</a>
+</nav>
+<div class="breadcrumb"><a href="index.html">HOME</a><span>›</span>VERSANDBEDINGUNGEN</div>
+<div class="legal-container">
+  <h1 class="legal-title">VERSAND­BEDINGUNGEN</h1>
+
+  <div class="legal-section">
+    <h3>Lieferzeiten & Versandkosten</h3>
+    <table class="shipping-table">
+      <thead><tr><th>REGION</th><th>LIEFERZEIT</th><th>KOSTEN</th></tr></thead>
+      <tbody>
+        <tr><td>Deutschland (Standard)</td><td>3–5 Werktage</td><td><span class="free-badge">KOSTENLOS ab €99</span> / sonst €4,90</td></tr>
+        <tr><td>Deutschland (Express)</td><td>1–2 Werktage</td><td>€9,90</td></tr>
+        <tr><td>EU (Österreich, Schweiz, etc.)</td><td>5–8 Werktage</td><td><span class="free-badge">KOSTENLOS ab €150</span> / sonst €9,90</td></tr>
+        <tr><td>Restliche EU</td><td>6–10 Werktage</td><td>€14,90</td></tr>
+        <tr><td>Weltweit</td><td>10–20 Werktage</td><td>€24,90</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="legal-section">
+    <h3>Versandpartner</h3>
+    <p>Wir versenden mit DHL, DPD und für internationale Bestellungen mit UPS. Sie erhalten nach dem Versand eine E-Mail mit Ihrer Sendungsverfolgungsnummer.</p>
+  </div>
+
+  <div class="legal-section">
+    <h3>Verpackung</h3>
+    <p>Jede Bestellung wird in unserer charakteristischen schwarzen Geschenkbox mit goldenem Seidenband verpackt. Die Verpackung ist recyclebar und nachhaltig gestaltet. Auf Wunsch fügen wir eine persönliche Geschenkkarte bei.</p>
+  </div>
+
+  <div class="legal-section">
+    <h3>Lieferung & Annahme</h3>
+    <ul>
+      <li>Die Lieferung erfolgt an die bei der Bestellung angegebene Adresse.</li>
+      <li>Bei Abwesenheit hinterlässt der Zusteller eine Benachrichtigungskarte.</li>
+      <li>Pakete werden in der nächsten Packstation oder Filiale hinterlegt.</li>
+      <li>Bei offensichtlichen Transportschäden nehmen Sie die Ware nicht an oder vermerken Sie den Schaden beim Zusteller.</li>
+    </ul>
+  </div>
+
+  <div class="legal-section">
+    <h3>Rücksendung</h3>
+    <p>Rücksendungen sind binnen 14 Tagen möglich. Die Kosten der Rücksendung trägt der Käufer (außer bei fehlerhafter Ware). Bitte verwenden Sie den ursprünglichen Versandkarton oder eine vergleichbare Verpackung, um die Ware zu schützen.</p>
+    <p style="margin-top:.8rem">Rücksendeadresse:<br>
+    Chevalier &amp; Roth GmbH – Retourenlogistik<br>
+    Musterstraße 1, 10115 Berlin</p>
+  </div>
+
+  <div class="legal-section">
+    <h3>Zoll & Einfuhrsteuer (International)</h3>
+    <p>Bei Lieferungen außerhalb der EU können zusätzliche Zölle, Steuern oder Gebühren anfallen, die vom Empfänger zu tragen sind. Chevalier &amp; Roth haftet nicht für solche Kosten.</p>
+  </div>
+</div>
+<footer>
+  <span class="footer-copy">© 2025 Chevalier &amp; Roth GmbH. Alle Rechte vorbehalten.</span>
+  <div class="footer-links">
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="agb.html">AGB</a>
+    <a href="widerruf.html">Widerruf</a>
+    <a href="streitschlichtung.html">Streitschlichtung</a>
+    <a href="versandbedingungen.html">Versand</a>
+    <a href="zahlungssicherheit.html">Zahlung</a>
+  </div>
+</footer>
+<script>
+let menuOpen=false;
+function toggleMenu(){menuOpen=!menuOpen;document.getElementById('hamburger').classList.toggle('open',menuOpen);document.getElementById('navMenu').classList.toggle('open',menuOpen);}
+</script>
+</body>
+</html>
