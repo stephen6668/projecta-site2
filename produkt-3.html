@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leder Clutch – LUXE NOIR</title>
+<title>Leder Clutch – Chevalier & Roth</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Josefin+Sans:wght@100;300;400&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#C9A84C;--gold-light:#E8C96A;--black:#0A0A0A;--black-card:#1A1A1A;--white:#F5F0E8;--gray:#888;}
+:root{--gold:#AE9666;--gold-light:#C8AE88;--black:#0A0A0A;--black-card:#1A1A1A;--white:#F5F0E8;--gray:#888;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--black);color:var(--white);font-family:'Josefin Sans',sans-serif;font-weight:300;min-height:100vh;}
-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,0.97);border-bottom:1px solid rgba(201,168,76,0.3);padding:0 2rem;height:70px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(10px);}
+header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,0.97);border-bottom:1px solid rgba(174,150,102,0.3);padding:0 2rem;height:70px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(10px);}
 .logo-area{display:flex;align-items:center;gap:12px;cursor:pointer;text-decoration:none;}
 .logo-img{width:44px;height:44px;object-fit:contain;}
 .logo-placeholder{width:44px;height:44px;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold);font-style:italic;}
 .logo-text{font-family:'Cormorant Garamond',serif;font-size:1.5rem;letter-spacing:6px;color:var(--gold);font-weight:300;}
 .header-actions{display:flex;align-items:center;gap:1.5rem;}
-.cart-btn{background:none;border:1px solid rgba(201,168,76,0.4);color:var(--gold);padding:8px 16px;font-family:'Josefin Sans',sans-serif;font-size:.7rem;letter-spacing:2px;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:8px;}
-.cart-btn:hover{background:rgba(201,168,76,0.1);}
+.cart-btn{background:none;border:1px solid rgba(174,150,102,0.4);color:var(--gold);padding:8px 16px;font-family:'Josefin Sans',sans-serif;font-size:.7rem;letter-spacing:2px;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:8px;}
+.cart-btn:hover{background:rgba(174,150,102,0.1);}
 .cart-count{background:var(--gold);color:var(--black);border-radius:50%;width:18px;height:18px;font-size:.65rem;display:flex;align-items:center;justify-content:center;}
 .hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:5px;background:none;border:none;}
 .hamburger span{display:block;width:26px;height:1.5px;background:var(--gold);transition:all .3s;}
@@ -27,7 +27,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10
 .nav-menu.open{transform:translateX(0);}
 .nav-menu a{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:var(--white);text-decoration:none;letter-spacing:8px;transition:color .3s;}
 .nav-menu a:hover{color:var(--gold);}
-.nav-divider{width:40px;height:1px;background:rgba(201,168,76,0.3);}
+.nav-divider{width:40px;height:1px;background:rgba(174,150,102,0.3);}
 .breadcrumb{padding:90px 3rem 0;font-size:.6rem;letter-spacing:3px;color:var(--gray);}
 .breadcrumb a{color:var(--gray);text-decoration:none;}
 .breadcrumb a:hover{color:var(--gold);}
@@ -36,7 +36,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10
 .product-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
 @media(max-width:768px){.product-grid{grid-template-columns:1fr;gap:2rem;}}
 .product-gallery{position:sticky;top:90px;}
-.main-image{aspect-ratio:3/4;background:linear-gradient(160deg,#1c1c1c,#101010);display:flex;align-items:center;justify-content:center;border:1px solid rgba(201,168,76,0.1);position:relative;}
+.main-image{aspect-ratio:3/4;background:linear-gradient(160deg,#1c1c1c,#101010);display:flex;align-items:center;justify-content:center;border:1px solid rgba(174,150,102,0.1);position:relative;}
 .img-emoji{font-size:10rem;opacity:.8;}
 .sale-badge{position:absolute;top:1.5rem;left:1.5rem;background:var(--gold);color:var(--black);font-size:.6rem;letter-spacing:3px;padding:6px 14px;}
 .thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:4px;}
@@ -45,7 +45,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10
 .product-info{padding-top:1rem;}
 .product-cat{font-size:.6rem;letter-spacing:4px;color:var(--gold);opacity:.8;margin-bottom:1rem;}
 .product-name{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;letter-spacing:5px;line-height:1.1;margin-bottom:1.5rem;}
-.price-row{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(201,168,76,0.2);}
+.price-row{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(174,150,102,0.2);}
 .price-main{font-family:'Cormorant Garamond',serif;font-size:2rem;letter-spacing:3px;color:var(--gold);}
 .price-orig{font-size:1rem;color:var(--gray);text-decoration:line-through;}
 .price-save{font-size:.65rem;letter-spacing:2px;color:#4CAF50;background:rgba(76,175,80,0.1);padding:4px 10px;}
@@ -55,11 +55,11 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10
 .detail-label{color:var(--gray);}.detail-val{color:var(--white);}
 .add-btn{width:100%;background:var(--gold);color:var(--black);border:none;padding:18px;font-family:'Josefin Sans',sans-serif;font-size:.75rem;letter-spacing:5px;cursor:pointer;transition:background .3s;margin-bottom:12px;}
 .add-btn:hover{background:var(--gold-light);}
-.wishlist-btn{width:100%;background:none;border:1px solid rgba(201,168,76,0.3);color:var(--gold);padding:14px;font-family:'Josefin Sans',sans-serif;font-size:.7rem;letter-spacing:3px;cursor:pointer;transition:all .3s;}
-.wishlist-btn:hover{border-color:var(--gold);background:rgba(201,168,76,0.05);}
+.wishlist-btn{width:100%;background:none;border:1px solid rgba(174,150,102,0.3);color:var(--gold);padding:14px;font-family:'Josefin Sans',sans-serif;font-size:.7rem;letter-spacing:3px;cursor:pointer;transition:all .3s;}
+.wishlist-btn:hover{border-color:var(--gold);background:rgba(174,150,102,0.05);}
 .guarantee{display:flex;gap:1.5rem;margin-top:2rem;flex-wrap:wrap;}
 .guarantee-item{font-size:.6rem;letter-spacing:1px;color:var(--gray);}
-footer{border-top:1px solid rgba(201,168,76,0.2);padding:3rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;}
+footer{border-top:1px solid rgba(174,150,102,0.2);padding:3rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;}
 .footer-copy{font-size:.6rem;letter-spacing:1px;color:var(--gray);}
 .footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
 .footer-links a{font-size:.6rem;letter-spacing:1px;color:var(--gray);text-decoration:none;transition:color .3s;}
@@ -71,9 +71,9 @@ footer{border-top:1px solid rgba(201,168,76,0.2);padding:3rem;display:flex;flex-
 <body>
 <header>
   <a class="logo-area" href="index.html">
-    <img src="logo.png" alt="LUXE NOIR" class="logo-img" onerror="this.style.display='none';document.getElementById('lf').style.display='flex'">
+    <img src="logo.png" alt="Chevalier & Roth" class="logo-img" onerror="this.style.display='none';document.getElementById('lf').style.display='flex'">
     <div class="logo-placeholder" id="lf" style="display:none">L</div>
-    <span class="logo-text">LUXE NOIR</span>
+    <span class="logo-text">Chevalier & Roth</span>
   </a>
   <div class="header-actions">
     <button class="cart-btn" onclick="location.href='cart.html'">
@@ -122,7 +122,7 @@ footer{border-top:1px solid rgba(201,168,76,0.2);padding:3rem;display:flex;flex-
       </div>
       <p class="product-desc">
         Diese handgefertigte Clutch aus feinstem Nappa-Leder ist das perfekte 
-        Accessoire für jeden eleganten Abend. Der goldene Verschluss mit dem LUXE NOIR 
+        Accessoire für jeden eleganten Abend. Der goldene Verschluss mit dem Chevalier & Roth 
         Monogramm verleiht ihr einen unverwechselbaren Charakter. Geräumig genug für 
         das Wesentliche, edel genug für jede Gelegenheit.
       </p>
@@ -144,7 +144,7 @@ footer{border-top:1px solid rgba(201,168,76,0.2);padding:3rem;display:flex;flex-
   </div>
 </div>
 <footer>
-  <span class="footer-copy">© 2025 LUXE NOIR GmbH. Alle Rechte vorbehalten.</span>
+  <span class="footer-copy">© 2025 Chevalier & Roth GmbH. Alle Rechte vorbehalten.</span>
   <div class="footer-links">
     <a href="impressum.html">Impressum</a>
     <a href="datenschutz.html">Datenschutz</a>
@@ -155,10 +155,10 @@ footer{border-top:1px solid rgba(201,168,76,0.2);padding:3rem;display:flex;flex-
 <div class="toast" id="toast"></div>
 <script>
 const PRODUCT={id:3,name:'Leder Clutch',emoji:'👜',cat:'accessoires',price:159,originalPrice:159};
-let cart=JSON.parse(localStorage.getItem('lnCart')||'[]');
+let cart=JSON.parse(localStorage.getItem('crCart')||'[]');
 let menuOpen=false;
 function updateCount(){document.getElementById('cartCount').textContent=cart.reduce((s,i)=>s+i.qty,0);}
-const disc=parseFloat(localStorage.getItem('lnDiscount')||'0');
+const disc=parseFloat(localStorage.getItem('crDiscount')||'0');
 if(disc>0){
   PRODUCT.price=Math.round(PRODUCT.originalPrice*(1-disc/100));
   document.getElementById('priceMain').textContent='€ '+PRODUCT.price.toLocaleString('de-DE');
@@ -172,7 +172,7 @@ if(disc>0){
 function addToCart(){
   const e=cart.find(x=>x.id===PRODUCT.id);
   if(e){e.qty++;}else{cart.push({...PRODUCT,qty:1});}
-  localStorage.setItem('lnCart',JSON.stringify(cart));updateCount();showToast('Leder Clutch hinzugefügt ✦');
+  localStorage.setItem('crCart',JSON.stringify(cart));updateCount();showToast('Leder Clutch hinzugefügt ✦');
 }
 function toggleMenu(){menuOpen=!menuOpen;document.getElementById('hamburger').classList.toggle('open',menuOpen);document.getElementById('navMenu').classList.toggle('open',menuOpen);}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
