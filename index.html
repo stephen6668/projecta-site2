@@ -3,603 +3,228 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chevalier & Roth – Offizielle Website</title>
+<meta name="description" content="Chevalier & Roth – Zeitlose Luxusmode. Entdecken Sie unsere exklusive Kollektion.">
+<title>Chevalier &amp; Roth – Offizielle Website</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Josefin+Sans:wght@100;300;400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --gold: #C9A84C;
-    --gold-light: #E8C96A;
-    --gold-dark: #9A7A2E;
-    --black: #0A0A0A;
-    --black-soft: #141414;
-    --black-card: #1A1A1A;
-    --white: #F5F0E8;
-    --gray: #888;
-  }
+:root{
+  --gold:#AE9666;
+  --gold-light:#C8AE88;
+  --gold-dark:#8A7252;
+  --black:#0A0A0A;
+  --black-soft:#141414;
+  --black-card:#1A1A1A;
+  --white:#F5F0E8;
+  --gray:#888;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Josefin Sans',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden;}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+/* ─── HEADER ─── */
+header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,0.96);border-bottom:1px solid rgba(174,150,102,0.3);padding:0 2.5rem;height:72px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(12px);}
+.logo-area{display:flex;align-items:center;gap:14px;cursor:pointer;text-decoration:none;}
+.logo-img{height:46px;width:auto;object-fit:contain;}
+.logo-placeholder{width:46px;height:46px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--gold);font-style:italic;}
+.logo-text{font-family:'Cormorant Garamond',serif;font-size:1.35rem;letter-spacing:4px;color:var(--gold);font-weight:300;line-height:1.2;}
+.logo-text small{display:block;font-size:.55rem;letter-spacing:6px;opacity:.7;font-style:normal;}
+.header-right{display:flex;align-items:center;gap:1.5rem;}
+.header-user{font-size:.6rem;letter-spacing:2px;color:var(--gold);display:none;}
+.cart-btn{background:none;border:1px solid rgba(174,150,102,0.4);color:var(--gold);padding:8px 18px;font-family:'Josefin Sans',sans-serif;font-size:.68rem;letter-spacing:2px;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:8px;}
+.cart-btn:hover{background:rgba(174,150,102,0.1);border-color:var(--gold);}
+.cart-count{background:var(--gold);color:var(--black);border-radius:50%;width:18px;height:18px;font-size:.6rem;display:flex;align-items:center;justify-content:center;font-weight:400;}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:5px;background:none;border:none;}
+.hamburger span{display:block;width:26px;height:1.5px;background:var(--gold);transition:all .35s;}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
 
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 300;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+/* ─── NAV ─── */
+.nav-overlay{position:fixed;top:72px;left:0;right:0;bottom:0;background:rgba(10,10,10,0.98);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;transform:translateX(-100%);transition:transform .55s cubic-bezier(.77,0,.18,1);border-top:1px solid rgba(174,150,102,0.15);}
+.nav-overlay.open{transform:translateX(0);}
+.nav-link{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:300;color:rgba(245,240,232,0.5);text-decoration:none;letter-spacing:8px;padding:.7rem 0;transition:color .3s,opacity .3s;position:relative;}
+.nav-link:hover,.nav-link.active-nav{color:var(--gold);}
+.nav-link::after{content:'';position:absolute;bottom:0;left:50%;right:50%;height:1px;background:var(--gold);transition:all .4s;}
+.nav-link:hover::after{left:0;right:0;}
+.nav-divider{width:1px;height:30px;background:rgba(174,150,102,0.2);margin:.2rem 0;}
+.nav-sub{display:flex;gap:2rem;margin-top:.5rem;}
+.nav-sub a{font-size:.6rem;letter-spacing:4px;color:var(--gray);text-decoration:none;transition:color .3s;}
+.nav-sub a:hover{color:var(--gold);}
 
-  /* ===== HEADER ===== */
-  header {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    background: rgba(10,10,10,0.97);
-    border-bottom: 1px solid rgba(201,168,76,0.3);
-    padding: 0 2rem;
-    height: 70px;
-    display: flex; align-items: center; justify-content: space-between;
-    backdrop-filter: blur(10px);
-  }
+/* ─── HERO ─── */
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0A0A0A 0%,#110f0a 40%,#0A0A0A 100%);}
+.hero-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(ellipse,rgba(174,150,102,0.07) 0%,transparent 70%);pointer-events:none;}
+.hero-frame{position:absolute;inset:40px;border:1px solid rgba(174,150,102,0.08);pointer-events:none;}
+.hero-frame::before{content:'';position:absolute;top:-1px;left:-1px;width:40px;height:40px;border-top:1px solid rgba(174,150,102,0.4);border-left:1px solid rgba(174,150,102,0.4);}
+.hero-frame::after{content:'';position:absolute;bottom:-1px;right:-1px;width:40px;height:40px;border-bottom:1px solid rgba(174,150,102,0.4);border-right:1px solid rgba(174,150,102,0.4);}
+.hero-content{text-align:center;z-index:1;padding:2rem;}
+.hero-eyebrow{font-size:.6rem;letter-spacing:8px;color:var(--gold);margin-bottom:2rem;opacity:.8;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,10vw,8rem);font-weight:300;line-height:.88;letter-spacing:10px;margin-bottom:2.5rem;}
+.hero-title .line1{display:block;color:var(--white);}
+.hero-title .line2{display:block;color:var(--gold);font-style:italic;font-size:.65em;letter-spacing:14px;}
+.hero-title .line3{display:block;color:var(--white);font-size:.9em;}
+.hero-sub{font-size:.65rem;letter-spacing:5px;color:var(--gray);margin-bottom:3.5rem;}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-primary{padding:15px 48px;background:var(--gold);color:var(--black);border:none;font-family:'Josefin Sans',sans-serif;font-size:.7rem;letter-spacing:4px;cursor:pointer;transition:background .3s;text-decoration:none;display:inline-block;}
+.btn-primary:hover{background:var(--gold-light);}
+.btn-outline{padding:15px 48px;background:none;border:1px solid rgba(174,150,102,0.5);color:var(--gold);font-family:'Josefin Sans',sans-serif;font-size:.7rem;letter-spacing:4px;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block;}
+.btn-outline:hover{border-color:var(--gold);background:rgba(174,150,102,0.05);}
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-size:.55rem;letter-spacing:3px;color:var(--gray);animation:bounce 2s infinite;}
+.scroll-hint::after{content:'';width:1px;height:40px;background:linear-gradient(to bottom,rgba(174,150,102,0.6),transparent);}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
 
-  .logo-area {
-    display: flex; align-items: center; gap: 12px; cursor: pointer;
-  }
-  .logo-placeholder {
-    width: 44px; height: 44px;
-    border: 2px solid var(--gold);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    color: var(--gold);
-    font-style: italic;
-    letter-spacing: 1px;
-    background: rgba(201,168,76,0.05);
-  }
-  .logo-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    letter-spacing: 6px;
-    color: var(--gold);
-    font-weight: 300;
-  }
+/* ─── MARQUEE ─── */
+.marquee-wrap{overflow:hidden;border-top:1px solid rgba(174,150,102,0.15);border-bottom:1px solid rgba(174,150,102,0.15);padding:.8rem 0;background:rgba(174,150,102,0.03);}
+.marquee{display:flex;gap:4rem;animation:marquee 20s linear infinite;white-space:nowrap;}
+.marquee-item{font-size:.58rem;letter-spacing:5px;color:var(--gray);display:flex;align-items:center;gap:1.5rem;flex-shrink:0;}
+.marquee-item::before{content:'✦';color:var(--gold);font-size:.5rem;}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  .header-actions { display: flex; align-items: center; gap: 1.5rem; }
+/* ─── SECTIONS ─── */
+.section{padding:7rem 4rem;}
+.section-inner{max-width:1400px;margin:0 auto;}
+.label{font-size:.58rem;letter-spacing:6px;color:var(--gold);opacity:.8;margin-bottom:.8rem;}
+.heading{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:300;letter-spacing:5px;color:var(--white);}
+.heading span{color:var(--gold);font-style:italic;}
 
-  .cart-btn {
-    background: none; border: 1px solid rgba(201,168,76,0.4);
-    color: var(--gold); padding: 8px 16px;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 0.7rem; letter-spacing: 2px;
-    cursor: pointer; transition: all 0.3s;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .cart-btn:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
-  .cart-count {
-    background: var(--gold); color: var(--black);
-    border-radius: 50%; width: 18px; height: 18px;
-    font-size: 0.65rem; display: flex; align-items: center; justify-content: center;
-    font-weight: 400;
-  }
+/* ─── FEATURED GRID ─── */
+.featured-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:3.5rem;}
+.feat-card{position:relative;overflow:hidden;cursor:pointer;background:var(--black-card);}
+.feat-card:first-child{grid-row:span 2;}
+.feat-img{width:100%;height:100%;min-height:320px;background:linear-gradient(160deg,#1c1c1c,#0e0e0e);display:flex;align-items:center;justify-content:center;font-size:7rem;transition:transform .7s cubic-bezier(.25,.46,.45,.94);overflow:hidden;}
+.feat-card:first-child .feat-img{min-height:650px;font-size:10rem;}
+.feat-card:hover .feat-img{transform:scale(1.04);}
+.feat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0) 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;}
+.feat-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;letter-spacing:3px;font-weight:300;}
+.feat-price{color:var(--gold);font-size:.75rem;letter-spacing:2px;margin-top:5px;}
+.feat-tag{position:absolute;top:1.2rem;right:1.2rem;background:var(--gold);color:var(--black);font-size:.55rem;letter-spacing:2px;padding:4px 12px;}
+.feat-btn{position:absolute;bottom:2rem;right:2rem;background:none;border:1px solid rgba(174,150,102,0.5);color:var(--gold);padding:8px 18px;font-family:'Josefin Sans',sans-serif;font-size:.6rem;letter-spacing:2px;cursor:pointer;transition:all .3s;opacity:0;transform:translateY(8px);}
+.feat-card:hover .feat-btn{opacity:1;transform:translateY(0);}
+.feat-btn:hover{background:rgba(174,150,102,0.1);}
 
-  /* Hamburger */
-  .hamburger {
-    display: flex; flex-direction: column; gap: 5px;
-    cursor: pointer; padding: 5px;
-    background: none; border: none;
-  }
-  .hamburger span {
-    display: block; width: 26px; height: 1.5px;
-    background: var(--gold); transition: all 0.3s;
-  }
-  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .hamburger.open span:nth-child(2) { opacity: 0; }
-  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+/* ─── STATS ─── */
+.stats-section{border-top:1px solid rgba(174,150,102,0.1);border-bottom:1px solid rgba(174,150,102,0.1);padding:4rem;background:rgba(174,150,102,0.02);}
+.stats-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:var(--gold);font-weight:300;letter-spacing:3px;}
+.stat-label{font-size:.58rem;letter-spacing:4px;color:var(--gray);margin-top:.4rem;}
 
-  /* ===== NAV MENU ===== */
-  .nav-menu {
-    position: fixed; top: 70px; left: 0; right: 0; bottom: 0;
-    background: rgba(10,10,10,0.99);
-    z-index: 999; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 2.5rem;
-    transform: translateX(-100%); transition: transform 0.5s cubic-bezier(0.77,0,0.18,1);
-    border-top: 1px solid rgba(201,168,76,0.2);
-  }
-  .nav-menu.open { transform: translateX(0); }
-  .nav-menu a {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.8rem; font-weight: 300;
-    color: var(--white); text-decoration: none;
-    letter-spacing: 8px; transition: color 0.3s;
-    position: relative;
-  }
-  .nav-menu a::after {
-    content: ''; position: absolute; bottom: -4px;
-    left: 50%; right: 50%; height: 1px;
-    background: var(--gold); transition: all 0.4s;
-  }
-  .nav-menu a:hover { color: var(--gold); }
-  .nav-menu a:hover::after { left: 0; right: 0; }
-  .nav-divider { width: 40px; height: 1px; background: rgba(201,168,76,0.3); }
+/* ─── PHILOSOPHY ─── */
+.philosophy-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.philosophy-visual{aspect-ratio:4/5;background:linear-gradient(160deg,#181818,#0e0e0e);display:flex;align-items:center;justify-content:center;font-size:12rem;position:relative;border:1px solid rgba(174,150,102,0.08);}
+.philosophy-visual::before{content:'';position:absolute;inset:20px;border:1px solid rgba(174,150,102,0.08);}
+.philosophy-text p{font-size:.78rem;line-height:2.2;color:#aaa;letter-spacing:.5px;margin-bottom:1.5rem;}
+.philosophy-quote{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;color:var(--gold);letter-spacing:2px;border-left:1px solid rgba(174,150,102,0.4);padding-left:1.5rem;margin:2rem 0;}
 
-  /* ===== PAGES ===== */
-  .page { display: none; padding-top: 70px; min-height: 100vh; }
-  .page.active { display: block; }
+/* ─── PRODUCTS MINI GRID ─── */
+.products-preview{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:3px;margin-top:3rem;}
+.prod-card{background:var(--black-card);cursor:pointer;position:relative;overflow:hidden;}
+.prod-img{aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(160deg,#1c1c1c,#0f0f0f);transition:transform .6s ease;}
+.prod-card:hover .prod-img{transform:scale(1.04);}
+.prod-info{padding:1.2rem 1.4rem 1.5rem;}
+.prod-cat{font-size:.52rem;letter-spacing:3px;color:var(--gold);opacity:.7;}
+.prod-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:2px;margin:5px 0;}
+.prod-price{font-size:.8rem;color:var(--gold);letter-spacing:1px;}
+.prod-sale{position:absolute;top:.8rem;left:.8rem;background:var(--gold);color:var(--black);font-size:.52rem;letter-spacing:2px;padding:3px 10px;}
+.prod-add{width:100%;background:none;border-top:1px solid rgba(174,150,102,0.2);color:var(--gold);padding:10px;font-family:'Josefin Sans',sans-serif;font-size:.6rem;letter-spacing:3px;cursor:pointer;transition:all .3s;opacity:0;transform:translateY(5px);}
+.prod-card:hover .prod-add{opacity:1;transform:translateY(0);}
+.prod-add:hover{background:rgba(174,150,102,0.08);}
 
-  /* ===== HOME ===== */
-  .hero {
-    height: calc(100vh - 70px);
-    display: flex; align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
-    background: linear-gradient(135deg, #0A0A0A 0%, #1a1408 50%, #0A0A0A 100%);
-  }
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%);
-  }
-  .hero-lines {
-    position: absolute; inset: 0; overflow: hidden; opacity: 0.15;
-  }
-  .hero-lines::before, .hero-lines::after {
-    content: ''; position: absolute;
-    border: 1px solid var(--gold);
-  }
-  .hero-lines::before {
-    top: 10%; left: 5%; right: 5%; bottom: 10%;
-  }
-  .hero-lines::after {
-    top: 15%; left: 10%; right: 10%; bottom: 15%;
-  }
-  .hero-content { text-align: center; z-index: 1; }
-  .hero-tag {
-    font-size: 0.65rem; letter-spacing: 6px; color: var(--gold);
-    margin-bottom: 1.5rem; opacity: 0.8;
-  }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(4rem, 10vw, 8rem);
-    font-weight: 300; line-height: 0.9;
-    letter-spacing: 15px; color: var(--white);
-    margin-bottom: 2rem;
-  }
-  .hero-title span { color: var(--gold); font-style: italic; }
-  .hero-subtitle {
-    font-size: 0.7rem; letter-spacing: 4px;
-    color: var(--gray); margin-bottom: 3rem;
-  }
-  .hero-cta {
-    display: inline-block; padding: 16px 50px;
-    border: 1px solid var(--gold); color: var(--gold);
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 0.7rem; letter-spacing: 4px;
-    cursor: pointer; background: none;
-    transition: all 0.4s; text-transform: uppercase;
-  }
-  .hero-cta:hover {
-    background: var(--gold); color: var(--black);
-  }
+/* ─── NEWSLETTER ─── */
+.newsletter{border-top:1px solid rgba(174,150,102,0.1);text-align:center;padding:6rem 2rem;}
+.newsletter .heading{margin-bottom:1rem;}
+.newsletter p{font-size:.72rem;letter-spacing:2px;color:var(--gray);margin-bottom:2.5rem;}
+.nl-form{display:flex;max-width:480px;margin:0 auto;gap:0;}
+.nl-input{flex:1;background:rgba(255,255,255,0.03);border:1px solid rgba(174,150,102,0.3);border-right:none;color:var(--white);padding:14px 20px;font-family:'Josefin Sans',sans-serif;font-size:.75rem;outline:none;letter-spacing:1px;transition:border-color .3s;}
+.nl-input:focus{border-color:var(--gold);}
+.nl-input::placeholder{color:var(--gray);}
+.nl-btn{background:var(--gold);color:var(--black);border:none;padding:14px 28px;font-family:'Josefin Sans',sans-serif;font-size:.65rem;letter-spacing:3px;cursor:pointer;transition:background .3s;white-space:nowrap;}
+.nl-btn:hover{background:var(--gold-light);}
 
-  /* Featured section */
-  .section { padding: 6rem 3rem; }
-  .section-tag {
-    font-size: 0.6rem; letter-spacing: 5px;
-    color: var(--gold); margin-bottom: 1rem; opacity: 0.8;
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 300; letter-spacing: 5px;
-    margin-bottom: 3rem; color: var(--white);
-  }
+/* ─── FOOTER ─── */
+footer{border-top:1px solid rgba(174,150,102,0.2);padding:5rem 4rem 2rem;background:var(--black-soft);}
+.footer-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem;}
+.footer-brand .logo-text{font-size:1.2rem;}
+.footer-brand p{font-size:.7rem;line-height:1.9;color:var(--gray);max-width:260px;margin-top:1rem;}
+.footer-col h4{font-size:.58rem;letter-spacing:5px;color:var(--gold);margin-bottom:1.5rem;opacity:.8;}
+.footer-col a{display:block;font-size:.7rem;color:var(--gray);margin-bottom:.8rem;cursor:pointer;transition:color .3s;text-decoration:none;letter-spacing:.5px;}
+.footer-col a:hover{color:var(--gold);}
+.footer-bottom{max-width:1400px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.05);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-copy{font-size:.58rem;color:var(--gray);letter-spacing:1px;}
+.footer-legal{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.footer-legal a{font-size:.58rem;color:var(--gray);cursor:pointer;transition:color .3s;text-decoration:none;}
+.footer-legal a:hover{color:var(--gold);}
 
-  .featured-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2px;
-  }
-  .feat-card {
-    position: relative; aspect-ratio: 3/4; overflow: hidden;
-    cursor: pointer; background: var(--black-card);
-  }
-  .feat-img {
-    width: 100%; height: 100%;
-    background: linear-gradient(160deg, #1a1a1a, #0d0d0d);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 4rem; transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
-  }
-  .feat-card:hover .feat-img { transform: scale(1.05); }
-  .feat-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 50%);
-    display: flex; flex-direction: column;
-    justify-content: flex-end; padding: 1.5rem;
-  }
-  .feat-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem; letter-spacing: 3px; font-weight: 300;
-  }
-  .feat-price { color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; margin-top: 4px; }
-  .feat-badge {
-    position: absolute; top: 1rem; right: 1rem;
-    background: var(--gold); color: var(--black);
-    font-size: 0.6rem; letter-spacing: 2px;
-    padding: 4px 10px;
-  }
+/* ─── AUTH MODAL ─── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:2000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--black-card);border:1px solid rgba(174,150,102,0.25);padding:3rem;width:100%;max-width:440px;position:relative;box-shadow:0 0 80px rgba(174,150,102,0.08);}
+.modal-close{position:absolute;top:1rem;right:1.5rem;background:none;border:none;color:var(--gray);font-size:1.5rem;cursor:pointer;transition:color .3s;}
+.modal-close:hover{color:var(--gold);}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;letter-spacing:5px;font-weight:300;color:var(--gold);margin-bottom:2rem;text-align:center;}
+.form-group{margin-bottom:1.5rem;}
+.form-label{display:block;font-size:.58rem;letter-spacing:3px;color:var(--gray);margin-bottom:8px;}
+.form-input{width:100%;background:rgba(255,255,255,0.02);border:none;border-bottom:1px solid rgba(174,150,102,0.3);color:var(--white);padding:10px 4px;font-family:'Josefin Sans',sans-serif;font-size:.85rem;outline:none;transition:border-color .3s;letter-spacing:1px;}
+.form-input:focus{border-color:var(--gold);}
+.form-btn{width:100%;background:var(--gold);color:var(--black);border:none;padding:14px;font-family:'Josefin Sans',sans-serif;font-size:.7rem;letter-spacing:4px;cursor:pointer;transition:background .3s;margin-top:.5rem;}
+.form-btn:hover{background:var(--gold-light);}
+.form-switch{text-align:center;margin-top:1.5rem;font-size:.65rem;letter-spacing:1px;color:var(--gray);}
+.form-switch a{color:var(--gold);cursor:pointer;}
+.form-msg{font-size:.68rem;text-align:center;margin-top:1rem;letter-spacing:1px;min-height:20px;}
 
-  /* ===== PRODUCTS PAGE ===== */
-  .products-header {
-    padding: 4rem 3rem 2rem;
-    border-bottom: 1px solid rgba(201,168,76,0.2);
-    display: flex; align-items: flex-end; justify-content: space-between;
-    flex-wrap: wrap; gap: 1rem;
-  }
-  .filter-bar { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .filter-btn {
-    background: none; border: 1px solid rgba(201,168,76,0.3);
-    color: var(--gray); padding: 8px 20px;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 0.65rem; letter-spacing: 2px;
-    cursor: pointer; transition: all 0.3s;
-  }
-  .filter-btn.active, .filter-btn:hover {
-    border-color: var(--gold); color: var(--gold);
-  }
+/* ─── COOKIE BANNER ─── */
+.cookie-banner{position:fixed;bottom:0;left:0;right:0;background:rgba(20,20,20,0.98);border-top:1px solid rgba(174,150,102,0.3);z-index:5000;padding:1.5rem 3rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;backdrop-filter:blur(10px);transform:translateY(100%);transition:transform .5s ease;}
+.cookie-banner.visible{transform:translateY(0);}
+.cookie-text{font-size:.7rem;line-height:1.8;color:var(--gray);max-width:700px;}
+.cookie-text a{color:var(--gold);text-decoration:none;}
+.cookie-text a:hover{text-decoration:underline;}
+.cookie-actions{display:flex;gap:.8rem;flex-shrink:0;flex-wrap:wrap;}
+.cookie-accept{background:var(--gold);color:var(--black);border:none;padding:10px 28px;font-family:'Josefin Sans',sans-serif;font-size:.65rem;letter-spacing:3px;cursor:pointer;transition:background .3s;}
+.cookie-accept:hover{background:var(--gold-light);}
+.cookie-decline{background:none;border:1px solid rgba(174,150,102,0.3);color:var(--gray);padding:10px 20px;font-family:'Josefin Sans',sans-serif;font-size:.65rem;letter-spacing:2px;cursor:pointer;transition:all .3s;}
+.cookie-decline:hover{border-color:var(--gold);color:var(--gold);}
 
-  .promo-banner {
-    margin: 2rem 3rem; padding: 1rem 2rem;
-    border: 1px solid var(--gold);
-    background: rgba(201,168,76,0.05);
-    display: flex; align-items: center; gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .promo-banner span { font-size: 0.65rem; letter-spacing: 2px; color: var(--gold); }
-  .promo-input {
-    background: none; border-bottom: 1px solid rgba(201,168,76,0.5);
-    color: var(--white); padding: 6px 10px; width: 160px;
-    font-family: 'Josefin Sans', sans-serif; font-size: 0.75rem;
-    letter-spacing: 2px; outline: none;
-  }
-  .promo-input::placeholder { color: var(--gray); }
-  .promo-apply {
-    background: var(--gold); color: var(--black); border: none;
-    padding: 8px 20px; font-family: 'Josefin Sans', sans-serif;
-    font-size: 0.65rem; letter-spacing: 2px; cursor: pointer;
-    transition: background 0.3s;
-  }
-  .promo-apply:hover { background: var(--gold-light); }
-  .promo-msg { font-size: 0.7rem; color: #4CAF50; display: none; }
-  .promo-err { font-size: 0.7rem; color: #f44336; display: none; }
+/* ─── TOAST ─── */
+.toast{position:fixed;bottom:5rem;right:2rem;z-index:3000;background:var(--black-card);border:1px solid var(--gold);padding:1rem 1.5rem;font-size:.68rem;letter-spacing:2px;color:var(--gold);transform:translateY(100px);opacity:0;transition:all .4s;pointer-events:none;box-shadow:0 0 30px rgba(174,150,102,0.15);}
+.toast.show{transform:translateY(0);opacity:1;}
 
-  .products-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2px; padding: 2px;
-  }
-
-  .product-card {
-    background: var(--black-card); position: relative;
-    cursor: pointer; transition: transform 0.3s;
-    overflow: hidden;
-  }
-  .product-card:hover { z-index: 2; }
-  .product-img {
-    aspect-ratio: 3/4; width: 100%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 3.5rem;
-    background: linear-gradient(160deg, #1c1c1c, #101010);
-    position: relative; overflow: hidden;
-    transition: transform 0.6s ease;
-  }
-  .product-card:hover .product-img { transform: scale(1.03); }
-  .product-info { padding: 1.2rem 1.5rem; }
-  .product-cat { font-size: 0.55rem; letter-spacing: 3px; color: var(--gold); opacity: 0.7; }
-  .product-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem; letter-spacing: 2px; margin: 4px 0;
-  }
-  .product-price-row { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
-  .product-price { font-size: 0.9rem; letter-spacing: 1px; color: var(--gold); }
-  .product-original { font-size: 0.75rem; color: var(--gray); text-decoration: line-through; display: none; }
-  .product-discount { font-size: 0.6rem; color: #4CAF50; letter-spacing: 1px; display: none; }
-  .product-add {
-    width: 100%; background: none; border: 1px solid rgba(201,168,76,0.3);
-    color: var(--gold); padding: 10px;
-    font-family: 'Josefin Sans', sans-serif; font-size: 0.65rem; letter-spacing: 3px;
-    cursor: pointer; margin-top: 1rem; transition: all 0.3s;
-    text-transform: uppercase;
-  }
-  .product-add:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
-  .sale-tag {
-    position: absolute; top: 1rem; left: 1rem;
-    background: #c0392b; color: #fff;
-    font-size: 0.55rem; letter-spacing: 2px; padding: 4px 10px;
-    display: none;
-  }
-
-  /* ===== CART PAGE ===== */
-  .cart-container { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
-  .cart-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem; letter-spacing: 8px; font-weight: 300;
-    margin-bottom: 3rem; color: var(--white);
-  }
-  .cart-title span { color: var(--gold); }
-  .cart-empty { text-align: center; padding: 5rem 0; color: var(--gray); letter-spacing: 2px; font-size: 0.8rem; }
-  .cart-items { border-top: 1px solid rgba(201,168,76,0.2); }
-  .cart-item {
-    display: flex; align-items: center; gap: 1.5rem;
-    padding: 1.5rem 0; border-bottom: 1px solid rgba(201,168,76,0.1);
-  }
-  .cart-item-img {
-    width: 80px; height: 100px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 2.5rem; background: var(--black-card);
-  }
-  .cart-item-info { flex: 1; }
-  .cart-item-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; letter-spacing: 2px; }
-  .cart-item-cat { font-size: 0.6rem; letter-spacing: 2px; color: var(--gold); opacity: 0.7; margin-top: 3px; }
-  .cart-item-price { font-size: 0.85rem; color: var(--gold); margin-top: 8px; letter-spacing: 1px; }
-  .cart-qty { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
-  .qty-btn {
-    width: 26px; height: 26px; border: 1px solid rgba(201,168,76,0.4);
-    background: none; color: var(--gold); cursor: pointer;
-    font-size: 1rem; display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
-  }
-  .qty-btn:hover { background: rgba(201,168,76,0.1); }
-  .qty-num { font-size: 0.8rem; letter-spacing: 1px; min-width: 20px; text-align: center; }
-  .cart-remove {
-    background: none; border: none; color: var(--gray);
-    cursor: pointer; font-size: 0.7rem; letter-spacing: 1px;
-    padding: 6px; transition: color 0.3s;
-  }
-  .cart-remove:hover { color: #f44336; }
-  .cart-summary {
-    margin-top: 2rem; padding: 2rem;
-    border: 1px solid rgba(201,168,76,0.2);
-    background: var(--black-card);
-  }
-  .cart-summary-row {
-    display: flex; justify-content: space-between;
-    padding: 8px 0; font-size: 0.75rem; letter-spacing: 2px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  .cart-total-row {
-    display: flex; justify-content: space-between;
-    padding: 16px 0 0; font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem; letter-spacing: 3px; color: var(--gold);
-  }
-  .checkout-btn {
-    width: 100%; background: var(--gold); color: var(--black);
-    border: none; padding: 16px; margin-top: 1.5rem;
-    font-family: 'Josefin Sans', sans-serif; font-size: 0.75rem;
-    letter-spacing: 4px; cursor: pointer; transition: background 0.3s;
-    text-transform: uppercase;
-  }
-  .checkout-btn:hover { background: var(--gold-light); }
-
-  /* ===== AUTH MODAL ===== */
-  .modal-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.85);
-    z-index: 2000; display: none;
-    align-items: center; justify-content: center;
-    backdrop-filter: blur(4px);
-  }
-  .modal-overlay.open { display: flex; }
-  .modal {
-    background: var(--black-card);
-    border: 1px solid rgba(201,168,76,0.3);
-    padding: 3rem; width: 100%; max-width: 440px;
-    position: relative;
-    box-shadow: 0 0 60px rgba(201,168,76,0.1);
-  }
-  .modal-close {
-    position: absolute; top: 1rem; right: 1.5rem;
-    background: none; border: none; color: var(--gray);
-    font-size: 1.5rem; cursor: pointer;
-  }
-  .modal-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem; letter-spacing: 5px; font-weight: 300;
-    color: var(--gold); margin-bottom: 2rem; text-align: center;
-  }
-  .form-group { margin-bottom: 1.5rem; }
-  .form-label { display: block; font-size: 0.6rem; letter-spacing: 3px; color: var(--gray); margin-bottom: 8px; }
-  .form-input {
-    width: 100%; background: rgba(255,255,255,0.03);
-    border: none; border-bottom: 1px solid rgba(201,168,76,0.3);
-    color: var(--white); padding: 10px 4px;
-    font-family: 'Josefin Sans', sans-serif; font-size: 0.85rem;
-    outline: none; transition: border-color 0.3s; letter-spacing: 1px;
-  }
-  .form-input:focus { border-color: var(--gold); }
-  .form-btn {
-    width: 100%; background: var(--gold); color: var(--black);
-    border: none; padding: 14px;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 0.7rem; letter-spacing: 4px; cursor: pointer;
-    transition: background 0.3s; margin-top: 0.5rem;
-  }
-  .form-btn:hover { background: var(--gold-light); }
-  .form-switch { text-align: center; margin-top: 1.5rem; font-size: 0.65rem; letter-spacing: 1px; color: var(--gray); }
-  .form-switch a { color: var(--gold); cursor: pointer; }
-  .form-msg { font-size: 0.7rem; text-align: center; margin-top: 1rem; letter-spacing: 1px; min-height: 20px; }
-
-  /* ===== ADMIN PAGE ===== */
-  .admin-container { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
-  .admin-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 3rem; padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(201,168,76,0.3);
-  }
-  .admin-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem; letter-spacing: 8px; color: var(--gold);
-  }
-  .admin-logout {
-    background: none; border: 1px solid rgba(201,168,76,0.3);
-    color: var(--gray); padding: 8px 20px; cursor: pointer;
-    font-family: 'Josefin Sans', sans-serif; font-size: 0.65rem; letter-spacing: 2px;
-    transition: all 0.3s;
-  }
-  .admin-logout:hover { border-color: var(--gold); color: var(--gold); }
-  .admin-tabs { display: flex; gap: 4px; margin-bottom: 2.5rem; }
-  .admin-tab {
-    background: none; border: 1px solid rgba(201,168,76,0.2);
-    color: var(--gray); padding: 10px 24px;
-    font-family: 'Josefin Sans', sans-serif; font-size: 0.65rem; letter-spacing: 2px;
-    cursor: pointer; transition: all 0.3s;
-  }
-  .admin-tab.active, .admin-tab:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.05); }
-  .admin-panel { display: none; }
-  .admin-panel.active { display: block; }
-
-  /* Products table */
-  .admin-table { width: 100%; border-collapse: collapse; }
-  .admin-table th {
-    font-size: 0.6rem; letter-spacing: 3px; color: var(--gold);
-    padding: 12px 16px; text-align: left;
-    border-bottom: 1px solid rgba(201,168,76,0.3);
-  }
-  .admin-table td {
-    padding: 14px 16px; font-size: 0.78rem; letter-spacing: 1px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    vertical-align: middle;
-  }
-  .admin-table tr:hover td { background: rgba(201,168,76,0.03); }
-  .admin-edit-btn, .admin-save-btn {
-    background: none; border: 1px solid rgba(201,168,76,0.4);
-    color: var(--gold); padding: 5px 14px; cursor: pointer;
-    font-family: 'Josefin Sans', sans-serif; font-size: 0.6rem; letter-spacing: 1px;
-    transition: all 0.3s;
-  }
-  .admin-save-btn { border-color: #4CAF50; color: #4CAF50; display: none; }
-  .admin-edit-btn:hover { background: rgba(201,168,76,0.1); }
-  .admin-save-btn:hover { background: rgba(76,175,80,0.1); }
-  .inline-input {
-    background: none; border: none; border-bottom: 1px solid rgba(201,168,76,0.4);
-    color: var(--white); padding: 3px 6px; width: 100%;
-    font-family: 'Josefin Sans', sans-serif; font-size: 0.78rem;
-    outline: none; letter-spacing: 1px;
-  }
-
-  /* Discount panel */
-  .discount-card {
-    background: var(--black-card); border: 1px solid rgba(201,168,76,0.2);
-    padding: 2rem; margin-bottom: 1.5rem;
-  }
-  .discount-card h3 {
-    font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
-    letter-spacing: 3px; color: var(--gold); margin-bottom: 1.5rem;
-  }
-  .discount-form { display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end; }
-  .discount-label { font-size: 0.6rem; letter-spacing: 2px; color: var(--gray); margin-bottom: 6px; display: block; }
-  .discount-input {
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.3);
-    color: var(--white); padding: 8px 14px; width: 180px;
-    font-family: 'Josefin Sans', sans-serif; font-size: 0.8rem; outline: none;
-    letter-spacing: 1px; transition: border-color 0.3s;
-  }
-  .discount-input:focus { border-color: var(--gold); }
-  .discount-btn {
-    background: var(--gold); color: var(--black); border: none;
-    padding: 10px 24px; font-family: 'Josefin Sans', sans-serif;
-    font-size: 0.65rem; letter-spacing: 3px; cursor: pointer; transition: background 0.3s;
-  }
-  .discount-btn:hover { background: var(--gold-light); }
-  .discount-list { margin-top: 1.5rem; }
-  .discount-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-    font-size: 0.75rem; letter-spacing: 1px;
-  }
-  .discount-code { color: var(--gold); font-weight: 400; }
-  .discount-del { background: none; border: none; color: #f44336; cursor: pointer; font-size: 0.7rem; }
-
-  /* ===== LEGAL PAGES ===== */
-  .legal-container { max-width: 800px; margin: 0 auto; padding: 4rem 2rem; }
-  .legal-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem; letter-spacing: 6px; font-weight: 300;
-    color: var(--gold); margin-bottom: 3rem;
-  }
-  .legal-section { margin-bottom: 2.5rem; }
-  .legal-section h3 {
-    font-size: 0.7rem; letter-spacing: 3px; color: var(--gold);
-    margin-bottom: 1rem; text-transform: uppercase;
-  }
-  .legal-section p, .legal-section ul {
-    font-size: 0.8rem; line-height: 1.9; color: #aaa; letter-spacing: 0.5px;
-  }
-  .legal-section ul { padding-left: 1.5rem; }
-  .legal-section ul li { margin-bottom: 0.5rem; }
-
-  /* ===== FOOTER ===== */
-  footer {
-    border-top: 1px solid rgba(201,168,76,0.2);
-    padding: 4rem 3rem 2rem;
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 3rem;
-  }
-  .footer-brand .logo-text { font-size: 1.2rem; display: block; margin-bottom: 1rem; }
-  .footer-brand p { font-size: 0.7rem; line-height: 1.8; color: var(--gray); max-width: 250px; }
-  .footer-col h4 { font-size: 0.6rem; letter-spacing: 4px; color: var(--gold); margin-bottom: 1.2rem; }
-  .footer-col a {
-    display: block; font-size: 0.7rem; color: var(--gray);
-    margin-bottom: 0.7rem; cursor: pointer; transition: color 0.3s;
-    text-decoration: none; letter-spacing: 1px;
-  }
-  .footer-col a:hover { color: var(--gold); }
-  .footer-bottom {
-    grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,0.05);
-    padding-top: 1.5rem; display: flex;
-    justify-content: space-between; align-items: center; flex-wrap: gap;
-    font-size: 0.6rem; color: var(--gray); letter-spacing: 1px;
-    gap: 1rem;
-  }
-  .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-  .footer-links a { color: var(--gray); cursor: pointer; transition: color 0.3s; }
-  .footer-links a:hover { color: var(--gold); }
-
-  /* ===== TOAST ===== */
-  .toast {
-    position: fixed; bottom: 2rem; right: 2rem; z-index: 3000;
-    background: var(--black-card); border: 1px solid var(--gold);
-    padding: 1rem 1.5rem; font-size: 0.7rem; letter-spacing: 2px;
-    color: var(--gold); transform: translateY(100px); opacity: 0;
-    transition: all 0.4s; pointer-events: none;
-    box-shadow: 0 0 30px rgba(201,168,76,0.2);
-  }
-  .toast.show { transform: translateY(0); opacity: 1; }
-
-  /* User indicator */
-  .user-indicator {
-    font-size: 0.6rem; letter-spacing: 2px; color: var(--gold); display: none;
-  }
-
-  /* Responsive */
-  @media(max-width: 768px) {
-    .section { padding: 4rem 1.5rem; }
-    .products-header { padding: 2rem 1.5rem 1rem; }
-    .promo-banner { margin: 1rem 1.5rem; }
-    footer { padding: 3rem 1.5rem 2rem; }
-    .admin-container { padding: 2rem 1rem; }
-    .admin-tabs { flex-wrap: wrap; }
-    .hero-title { letter-spacing: 8px; }
-  }
-  @media(max-width: 480px) {
-    .hero-title { font-size: 3rem; letter-spacing: 5px; }
-    .nav-menu a { font-size: 2rem; letter-spacing: 5px; }
-  }
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .featured-grid{grid-template-columns:1fr 1fr;}
+  .feat-card:first-child{grid-row:span 1;}
+  .feat-card:first-child .feat-img{min-height:400px;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .philosophy-grid{grid-template-columns:1fr;gap:3rem;}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:768px){
+  .section{padding:5rem 1.5rem;}
+  header{padding:0 1.5rem;}
+  .featured-grid{grid-template-columns:1fr;}
+  .hero-title{letter-spacing:5px;}
+  .stats-section{padding:3rem 1.5rem;}
+  footer{padding:4rem 1.5rem 2rem;}
+  .footer-grid{grid-template-columns:1fr;}
+  .cookie-banner{padding:1.2rem 1.5rem;}
+}
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
 <header>
-  <div class="logo-area" onclick="navigate('home')">
-    <div class="logo-placeholder">L</div>
-    <span class="logo-text">LUXE NOIR</span>
-  </div>
-  <div class="header-actions">
-    <span class="user-indicator" id="userIndicator"></span>
-    <button class="cart-btn" onclick="navigate('cart')">
+  <a class="logo-area" href="index.html">
+    <img src="logo.png" alt="Chevalier &amp; Roth" class="logo-img"
+         onerror="this.style.display='none';document.getElementById('lf').style.display='flex'">
+    <div class="logo-placeholder" id="lf" style="display:none">C</div>
+    <div class="logo-text">
+      Chevalier &amp; Roth
+      <small>MAISON DE MODE</small>
+    </div>
+  </a>
+  <div class="header-right">
+    <span class="header-user" id="headerUser"></span>
+    <button class="cart-btn" onclick="location.href='cart.html'">
       ⊡ WARENKORB <span class="cart-count" id="cartCount">0</span>
     </button>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()">
@@ -608,303 +233,169 @@
   </div>
 </header>
 
-<!-- NAV MENU -->
-<nav class="nav-menu" id="navMenu">
-  <a onclick="navigate('home')">HOME</a>
+<!-- NAV -->
+<nav class="nav-overlay" id="navOverlay">
+  <a class="nav-link" href="index.html">HOME</a>
   <div class="nav-divider"></div>
-  <a onclick="navigate('products')">KOLLEKTION</a>
+  <a class="nav-link" href="index.html#kollektion">KOLLEKTION</a>
   <div class="nav-divider"></div>
-  <a onclick="navigate('cart')">WARENKORB</a>
+  <a class="nav-link" href="cart.html">WARENKORB</a>
   <div class="nav-divider"></div>
-  <a onclick="openAuth('login')" id="authNavBtn">ANMELDEN</a>
+  <a class="nav-link" id="navAuthBtn" href="#" onclick="openAuth('login');return false;">ANMELDEN</a>
   <div class="nav-divider"></div>
-  <a onclick="navigate('impressum')">IMPRESSUM</a>
+  <a class="nav-link" href="impressum.html">IMPRESSUM</a>
+  <div class="nav-sub">
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="agb.html">AGB</a>
+    <a href="versandbedingungen.html">Versand</a>
+    <a href="zahlungssicherheit.html">Zahlung</a>
+  </div>
 </nav>
 
-<!-- ===== HOME PAGE ===== -->
-<div class="page active" id="page-home">
-  <section class="hero">
-    <div class="hero-lines"></div>
-    <div class="hero-content">
-      <p class="hero-tag">NEUE KOLLEKTION 2025</p>
-      <h1 class="hero-title">LUXE<br><span>NOIR</span></h1>
-      <p class="hero-subtitle">EXKLUSIVITÄT TRIFFT ZEITLOSIGKEIT</p>
-      <button class="hero-cta" onclick="navigate('products')">KOLLEKTION ENTDECKEN</button>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-frame"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">KOLLEKTION 2025 – JETZT VERFÜGBAR</p>
+    <h1 class="hero-title">
+      <span class="line1">CHEVALIER</span>
+      <span class="line2">&amp;</span>
+      <span class="line3">ROTH</span>
+    </h1>
+    <p class="hero-sub">HAUTE COUTURE · BERLIN · SEIT 2018</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#kollektion">KOLLEKTION ENTDECKEN</a>
+      <a class="btn-outline" href="#" onclick="openAuth('register');return false;">KONTO ERSTELLEN</a>
     </div>
-  </section>
+  </div>
+  <div class="scroll-hint">ENTDECKEN</div>
+</section>
 
-  <section class="section">
-    <p class="section-tag">AUSGEWÄHLTE STÜCKE</p>
-    <h2 class="section-title">FEATURED</h2>
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee">
+    <span class="marquee-item">KOSTENLOSER VERSAND AB €99</span>
+    <span class="marquee-item">SICHERE ZAHLUNG VIA STRIPE</span>
+    <span class="marquee-item">14 TAGE RÜCKGABE</span>
+    <span class="marquee-item">MADE IN EUROPE</span>
+    <span class="marquee-item">EXKLUSIVE KOLLEKTION 2025</span>
+    <span class="marquee-item">HANDGEFERTIGT MIT SORGFALT</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">KOSTENLOSER VERSAND AB €99</span>
+    <span class="marquee-item">SICHERE ZAHLUNG VIA STRIPE</span>
+    <span class="marquee-item">14 TAGE RÜCKGABE</span>
+    <span class="marquee-item">MADE IN EUROPE</span>
+    <span class="marquee-item">EXKLUSIVE KOLLEKTION 2025</span>
+    <span class="marquee-item">HANDGEFERTIGT MIT SORGFALT</span>
+  </div>
+</div>
+
+<!-- FEATURED -->
+<section class="section" id="kollektion">
+  <div class="section-inner">
+    <p class="label">AUSGEWÄHLTE STÜCKE</p>
+    <h2 class="heading">FEATURED <span>PIECES</span></h2>
     <div class="featured-grid" id="featuredGrid"></div>
-  </section>
-
-  <section class="section" style="border-top: 1px solid rgba(201,168,76,0.1);">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
-      <div>
-        <p class="section-tag">UNSERE PHILOSOPHIE</p>
-        <h2 class="section-title" style="font-size: 2rem; letter-spacing: 4px;">QUALITÄT OHNE KOMPROMISSE</h2>
-        <p style="font-size: 0.78rem; line-height: 2; color: var(--gray); letter-spacing: 0.5px;">Jedes Stück in unserer Kollektion wird mit größter Sorgfalt gefertigt. Wir verwenden nur die edelsten Materialien und arbeiten mit erfahrenen Handwerkern zusammen, um Mode zu erschaffen, die Generationen überdauert.</p>
-        <button class="hero-cta" style="margin-top: 2rem; font-size: 0.65rem;" onclick="navigate('products')">ALLE PRODUKTE</button>
-      </div>
-      <div style="text-align: center; font-size: 8rem; opacity: 0.1;">✦</div>
-    </div>
-  </section>
-</div>
-
-<!-- ===== PRODUCTS PAGE ===== -->
-<div class="page" id="page-products">
-  <div class="products-header">
-    <div>
-      <p class="section-tag">ALLE STÜCKE</p>
-      <h2 class="section-title" style="margin-bottom: 0; font-size: 2rem;">KOLLEKTION</h2>
-    </div>
-    <div class="filter-bar">
-      <button class="filter-btn active" onclick="filterProducts('all', this)">ALLE</button>
-      <button class="filter-btn" onclick="filterProducts('damen', this)">DAMEN</button>
-      <button class="filter-btn" onclick="filterProducts('herren', this)">HERREN</button>
-      <button class="filter-btn" onclick="filterProducts('accessoires', this)">ACCESSOIRES</button>
-    </div>
   </div>
+</section>
 
-  <div class="promo-banner">
-    <span>AKTIONSCODE:</span>
-    <input class="promo-input" id="promoInput" placeholder="CODE EINGEBEN" maxlength="20">
-    <button class="promo-apply" onclick="applyPromo()">ANWENDEN</button>
-    <span class="promo-msg" id="promoMsg"></span>
-    <span class="promo-err" id="promoErr"></span>
-  </div>
-
-  <div class="products-grid" id="productsGrid"></div>
-</div>
-
-<!-- ===== CART PAGE ===== -->
-<div class="page" id="page-cart">
-  <div class="cart-container">
-    <h1 class="cart-title">MEIN <span>WARENKORB</span></h1>
-    <div id="cartContent"></div>
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stats-grid">
+    <div><div class="stat-num">2018</div><div class="stat-label">GEGRÜNDET IN BERLIN</div></div>
+    <div><div class="stat-num">47+</div><div class="stat-label">EXKLUSIVE MODELLE</div></div>
+    <div><div class="stat-num">12</div><div class="stat-label">LÄNDER WELTWEIT</div></div>
+    <div><div class="stat-num">100%</div><div class="stat-label">HANDGEFERTIGT</div></div>
   </div>
 </div>
 
-<!-- ===== ADMIN PAGE ===== -->
-<div class="page" id="page-admin">
-  <div class="admin-container">
-    <div class="admin-header">
-      <h1 class="admin-title">ADMIN PANEL</h1>
-      <button class="admin-logout" onclick="adminLogout()">AUSLOGGEN</button>
-    </div>
-    <div class="admin-tabs">
-      <button class="admin-tab active" onclick="switchAdminTab('products', this)">PRODUKTE</button>
-      <button class="admin-tab" onclick="switchAdminTab('discounts', this)">RABATTE</button>
-      <button class="admin-tab" onclick="switchAdminTab('codes', this)">AKTIONSCODES</button>
-    </div>
-
-    <!-- Products -->
-    <div class="admin-panel active" id="admin-products">
-      <table class="admin-table">
-        <thead>
-          <tr>
-            <th>EMOJI</th><th>PRODUKT</th><th>KATEGORIE</th><th>PREIS (€)</th><th>AKTION</th>
-          </tr>
-        </thead>
-        <tbody id="adminProductsTable"></tbody>
-      </table>
-    </div>
-
-    <!-- Global Discount -->
-    <div class="admin-panel" id="admin-discounts">
-      <div class="discount-card">
-        <h3>GLOBALER RABATT AUF ALLE PRODUKTE</h3>
-        <div class="discount-form">
-          <div>
-            <label class="discount-label">RABATT IN %</label>
-            <input class="discount-input" id="globalDiscountInput" type="number" min="0" max="90" placeholder="z.B. 20">
-          </div>
-          <button class="discount-btn" onclick="applyGlobalDiscount()">RABATT SETZEN</button>
-          <button class="discount-btn" style="background: none; border: 1px solid rgba(201,168,76,0.4); color: var(--gold);" onclick="removeGlobalDiscount()">RABATT ENTFERNEN</button>
-        </div>
-        <p style="font-size: 0.7rem; color: var(--gray); margin-top: 1rem; letter-spacing: 1px;" id="currentDiscount"></p>
-      </div>
-    </div>
-
-    <!-- Promo Codes -->
-    <div class="admin-panel" id="admin-codes">
-      <div class="discount-card">
-        <h3>NEUER AKTIONSCODE</h3>
-        <div class="discount-form">
-          <div>
-            <label class="discount-label">CODE</label>
-            <input class="discount-input" id="newCodeName" placeholder="z.B. SUMMER25" style="text-transform: uppercase;">
-          </div>
-          <div>
-            <label class="discount-label">RABATT %</label>
-            <input class="discount-input" id="newCodePercent" type="number" min="1" max="90" placeholder="z.B. 15" style="width: 100px;">
-          </div>
-          <button class="discount-btn" onclick="addPromoCode()">CODE ERSTELLEN</button>
-        </div>
-      </div>
-      <div class="discount-card">
-        <h3>AKTIVE CODES</h3>
-        <div class="discount-list" id="promoCodesList"></div>
+<!-- PHILOSOPHY -->
+<section class="section">
+  <div class="section-inner">
+    <div class="philosophy-grid">
+      <div class="philosophy-visual">✦</div>
+      <div class="philosophy-text">
+        <p class="label">UNSERE PHILOSOPHIE</p>
+        <h2 class="heading" style="margin-bottom:2rem">QUALITÄT OHNE<br><span>KOMPROMISSE</span></h2>
+        <p>Chevalier &amp; Roth wurde mit einer klaren Vision gegründet: Mode zu erschaffen, die nicht nur beautiful, sondern dauerhaft ist. Jedes Stück unserer Kollektion wird in kleinen Auflagen gefertigt – für Menschen, die das Besondere dem Gewöhnlichen vorziehen.</p>
+        <blockquote class="philosophy-quote">„Wahre Eleganz ist die Ablehnung des Überflüssigen."</blockquote>
+        <p>Unsere Materialien werden direkt von europäischen Webereien bezogen. Jede Naht, jeder Knopf, jedes Detail wird mit derselben Hingabe verarbeitet.</p>
+        <a class="btn-outline" href="#kollektion" style="margin-top:2rem;display:inline-block">MEHR ENTDECKEN</a>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ===== LEGAL PAGES ===== -->
-<div class="page" id="page-impressum">
-  <div class="legal-container">
-    <h1 class="legal-title">IMPRESSUM</h1>
-    <div class="legal-section">
-      <h3>Angaben gemäß § 5 TMG</h3>
-      <p>LUXE NOIR GmbH<br>Musterstraße 1<br>10115 Berlin<br>Deutschland</p>
+<!-- FULL COLLECTION PREVIEW -->
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <p class="label">ALLE PRODUKTE</p>
+    <h2 class="heading">DIE <span>KOLLEKTION</span></h2>
+    <div class="products-preview" id="productsGrid"></div>
+    <div style="text-align:center;margin-top:3rem">
+      <a class="btn-outline" href="index.html#kollektion">ALLE PRODUKTE ANZEIGEN</a>
     </div>
-    <div class="legal-section">
-      <h3>Kontakt</h3>
-      <p>Telefon: +49 30 123456789<br>E-Mail: info@luxenoir.de</p>
-    </div>
-    <div class="legal-section">
-      <h3>Handelsregister</h3>
-      <p>Registergericht: Amtsgericht Berlin Charlottenburg<br>Registernummer: HRB 123456</p>
-    </div>
-    <div class="legal-section">
-      <h3>Umsatzsteuer-ID</h3>
-      <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: DE123456789</p>
-    </div>
-    <div class="legal-section">
-      <h3>Verantwortlich für den Inhalt (§ 55 Abs. 2 RStV)</h3>
-      <p>Max Mustermann<br>Musterstraße 1, 10115 Berlin</p>
-    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <p class="label">BLEIBEN SIE INFORMIERT</p>
+  <h2 class="heading" style="margin-bottom:1rem">NEWSLETTER <span>ABONNIEREN</span></h2>
+  <p>Erhalten Sie exklusive Angebote, Neuheiten und Aktionscodes direkt in Ihr Postfach.</p>
+  <div class="nl-form">
+    <input class="nl-input" type="email" placeholder="Ihre E-Mail-Adresse">
+    <button class="nl-btn" onclick="nlSubmit(this)">ABONNIEREN</button>
   </div>
 </div>
 
-<div class="page" id="page-datenschutz">
-  <div class="legal-container">
-    <h1 class="legal-title">DATENSCHUTZ</h1>
-    <div class="legal-section">
-      <h3>1. Verantwortlicher</h3>
-      <p>LUXE NOIR GmbH, Musterstraße 1, 10115 Berlin. Die Verarbeitung Ihrer personenbezogenen Daten erfolgt gemäß der DSGVO.</p>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-text">Chevalier &amp; Roth<small>MAISON DE MODE</small></div>
+      <p>Zeitlose Luxusmode für den anspruchsvollen Geschmack. Qualität und Eleganz in jedem Detail – gefertigt in Europa seit 2018.</p>
     </div>
-    <div class="legal-section">
-      <h3>2. Erhobene Daten</h3>
-      <p>Wir erheben folgende Daten bei der Registrierung und Nutzung unseres Onlineshops:</p>
-      <ul>
-        <li>Name und E-Mail-Adresse bei der Registrierung</li>
-        <li>Bestelldaten und Kaufhistorie</li>
-        <li>Technische Daten (IP-Adresse, Browser-Typ)</li>
-      </ul>
+    <div class="footer-col">
+      <h4>NAVIGATION</h4>
+      <a href="index.html">Home</a>
+      <a href="#kollektion">Kollektion</a>
+      <a href="cart.html">Warenkorb</a>
+      <a href="#" onclick="openAuth('login');return false;">Anmelden</a>
     </div>
-    <div class="legal-section">
-      <h3>3. Zweck der Verarbeitung</h3>
-      <p>Ihre Daten werden ausschließlich zur Vertragsabwicklung, Kommunikation und Verbesserung unserer Dienste verwendet.</p>
+    <div class="footer-col">
+      <h4>RECHTLICHES</h4>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="agb.html">AGB</a>
+      <a href="widerruf.html">Widerruf</a>
+      <a href="streitschlichtung.html">Streitschlichtung</a>
+      <a href="versandbedingungen.html">Versandbedingungen</a>
+      <a href="zahlungssicherheit.html">Zahlungssicherheit</a>
     </div>
-    <div class="legal-section">
-      <h3>4. Ihre Rechte</h3>
-      <ul>
-        <li>Recht auf Auskunft (Art. 15 DSGVO)</li>
-        <li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
-        <li>Recht auf Löschung (Art. 17 DSGVO)</li>
-        <li>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
-        <li>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</li>
-      </ul>
+    <div class="footer-col">
+      <h4>KONTAKT</h4>
+      <a href="mailto:info@chevalier-roth.de">info@chevalier-roth.de</a>
+      <a>+49 30 123456789</a>
+      <a>Mo–Fr: 9:00–18:00 Uhr</a>
+      <a href="impressum.html">Berlin, Deutschland</a>
     </div>
-    <div class="legal-section">
-      <h3>5. Cookies</h3>
-      <p>Diese Website verwendet technisch notwendige Cookies zur Sicherstellung der Funktionalität des Onlineshops. Eine Einwilligung ist hierfür nicht erforderlich.</p>
-    </div>
-    <div class="legal-section">
-      <h3>6. Kontakt Datenschutzbeauftragter</h3>
-      <p>datenschutz@luxenoir.de</p>
-    </div>
-  </div>
-</div>
-
-<div class="page" id="page-agb">
-  <div class="legal-container">
-    <h1 class="legal-title">AGB</h1>
-    <div class="legal-section">
-      <h3>§ 1 Geltungsbereich</h3>
-      <p>Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge zwischen LUXE NOIR GmbH und dem Kunden über den Onlineshop unter www.luxenoir.de.</p>
-    </div>
-    <div class="legal-section">
-      <h3>§ 2 Vertragsschluss</h3>
-      <p>Die Darstellung der Produkte im Onlineshop stellt kein rechtlich bindendes Angebot dar. Erst durch Ihre Bestellung und unsere Bestätigung kommt ein Kaufvertrag zustande.</p>
-    </div>
-    <div class="legal-section">
-      <h3>§ 3 Preise & Zahlung</h3>
-      <p>Alle Preise verstehen sich in Euro inkl. gesetzlicher MwSt. Die Zahlung erfolgt per Kreditkarte, PayPal oder Vorkasse.</p>
-    </div>
-    <div class="legal-section">
-      <h3>§ 4 Widerrufsrecht</h3>
-      <p>Sie haben das Recht, binnen 14 Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt 14 Tage ab dem Tag der Lieferung.</p>
-    </div>
-    <div class="legal-section">
-      <h3>§ 5 Lieferung</h3>
-      <p>Die Lieferzeit beträgt 3–7 Werktage innerhalb Deutschlands. Lieferungen ins Ausland können abweichen.</p>
-    </div>
-    <div class="legal-section">
-      <h3>§ 6 Gewährleistung</h3>
-      <p>Es gelten die gesetzlichen Gewährleistungsrechte. Bei Mängeln haben Sie Anspruch auf Nacherfüllung, Minderung oder Rücktritt.</p>
-    </div>
-  </div>
-</div>
-
-<div class="page" id="page-widerruf">
-  <div class="legal-container">
-    <h1 class="legal-title">WIDERRUFSBELEHRUNG</h1>
-    <div class="legal-section">
-      <h3>Widerrufsrecht</h3>
-      <p>Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag, an dem Sie oder ein von Ihnen benannter Dritter die Waren in Besitz genommen haben.</p>
-    </div>
-    <div class="legal-section">
-      <h3>Ausübung des Widerrufsrechts</h3>
-      <p>Um Ihr Widerrufsrecht auszuüben, müssen Sie uns (LUXE NOIR GmbH, Musterstraße 1, 10115 Berlin, info@luxenoir.de) mittels einer eindeutigen Erklärung über Ihren Entschluss informieren.</p>
-    </div>
-    <div class="legal-section">
-      <h3>Folgen des Widerrufs</h3>
-      <p>Wenn Sie diesen Vertrag widerrufen, haben wir alle Zahlungen, die wir von Ihnen erhalten haben, unverzüglich und spätestens binnen vierzehn Tagen zurückzuzahlen.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ===== FOOTER ===== -->
-<footer id="mainFooter">
-  <div class="footer-brand">
-    <span class="logo-text">LUXE NOIR</span>
-    <p>Zeitlose Mode für den anspruchsvollen Geschmack. Qualität und Eleganz in jedem Detail.</p>
-  </div>
-  <div class="footer-col">
-    <h4>NAVIGATION</h4>
-    <a onclick="navigate('home')">Home</a>
-    <a onclick="navigate('products')">Kollektion</a>
-    <a onclick="navigate('cart')">Warenkorb</a>
-    <a onclick="openAuth('login')">Anmelden</a>
-  </div>
-  <div class="footer-col">
-    <h4>RECHTLICHES</h4>
-    <a onclick="navigate('impressum')">Impressum</a>
-    <a onclick="navigate('datenschutz')">Datenschutz</a>
-    <a onclick="navigate('agb')">AGB</a>
-    <a onclick="navigate('widerruf')">Widerrufsbelehrung</a>
-  </div>
-  <div class="footer-col">
-    <h4>KONTAKT</h4>
-    <a>info@luxenoir.de</a>
-    <a>+49 30 123456789</a>
-    <a>Mo–Fr: 9:00–18:00 Uhr</a>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 LUXE NOIR GmbH. Alle Rechte vorbehalten.</span>
-    <div class="footer-links">
-      <a onclick="navigate('impressum')">Impressum</a>
-      <a onclick="navigate('datenschutz')">Datenschutz</a>
-      <a onclick="navigate('agb')">AGB</a>
-      <a onclick="navigate('widerruf')">Widerruf</a>
+    <span class="footer-copy">© 2025 Chevalier &amp; Roth GmbH. Alle Rechte vorbehalten.</span>
+    <div class="footer-legal">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="agb.html">AGB</a>
+      <a href="widerruf.html">Widerruf</a>
+      <a href="streitschlichtung.html">Streitschlichtung</a>
     </div>
   </div>
 </footer>
 
-<!-- ===== AUTH MODAL ===== -->
+<!-- AUTH MODAL -->
 <div class="modal-overlay" id="authModal">
   <div class="modal">
     <button class="modal-close" onclick="closeAuth()">×</button>
@@ -943,434 +434,213 @@
   </div>
 </div>
 
-<!-- TOAST -->
+<!-- COOKIE BANNER -->
+<div class="cookie-banner" id="cookieBanner">
+  <p class="cookie-text">
+    Wir verwenden Cookies und ähnliche Technologien, um Ihnen das beste Einkaufserlebnis zu bieten. Technisch notwendige Cookies werden immer gesetzt. Weitere Informationen finden Sie in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.
+  </p>
+  <div class="cookie-actions">
+    <button class="cookie-decline" onclick="cookieDecline()">NUR NOTWENDIGE</button>
+    <button class="cookie-accept" onclick="cookieAccept()">ALLE AKZEPTIEREN</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-// ===== DATA =====
-const ADMIN_EMAIL = "admin@luxenoir.de";
-const ADMIN_PASS = "LuxeAdmin2025!";
+// ═══ CONFIG – HIER DEINE LINKS EINTRAGEN ═══
+const APPWRITE_ENDPOINT   = "https://DEINE-APPWRITE-URL.appwrite.io/v1";  // ← Appwrite URL hier eintragen
+const APPWRITE_PROJECT_ID = "DEIN_PROJECT_ID";                             // ← Appwrite Project ID hier eintragen
+const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/DEIN_STRIPE_LINK";    // ← Stripe Payment Link hier eintragen
+// ═══════════════════════════════════════════
+
+const ADMIN_EMAIL = "admin@chevalier-roth.de";
+const ADMIN_PASS  = "ChevalierAdmin2025!";
 
 let products = [
-  { id:1, emoji:"👗", name:"Abendkleid Noir", cat:"damen", price:389, originalPrice:389 },
-  { id:2, emoji:"🥿", name:"Klassische Pumps", cat:"damen", price:229, originalPrice:229 },
-  { id:3, emoji:"👜", name:"Leder Clutch", cat:"accessoires", price:159, originalPrice:159 },
-  { id:4, emoji:"🧥", name:"Cashmere Mantel", cat:"herren", price:649, originalPrice:649 },
-  { id:5, emoji:"👔", name:"Seidenkrawatte Gold", cat:"herren", price:89, originalPrice:89 },
-  { id:6, emoji:"⌚", name:"Goldene Uhr", cat:"accessoires", price:1290, originalPrice:1290 },
-  { id:7, emoji:"🧣", name:"Seidenschal", cat:"damen", price:119, originalPrice:119 },
-  { id:8, emoji:"🕶️", name:"Designer Sonnenbrille", cat:"accessoires", price:279, originalPrice:279 },
-  { id:9, emoji:"👞", name:"Oxford Schuhe", cat:"herren", price:349, originalPrice:349 },
+  {id:1,emoji:"👗",name:"Abendkleid Noir",cat:"DAMEN",price:389,originalPrice:389,link:"produkt-1.html"},
+  {id:2,emoji:"🥿",name:"Klassische Pumps",cat:"DAMEN",price:229,originalPrice:229,link:"produkt-2.html"},
+  {id:3,emoji:"👜",name:"Leder Clutch",cat:"ACCESSOIRES",price:159,originalPrice:159,link:"produkt-3.html"},
+  {id:4,emoji:"🧥",name:"Cashmere Mantel",cat:"HERREN",price:649,originalPrice:649,link:"#"},
+  {id:5,emoji:"👔",name:"Seidenkrawatte",cat:"HERREN",price:89,originalPrice:89,link:"#"},
+  {id:6,emoji:"⌚",name:"Goldene Uhr",cat:"ACCESSOIRES",price:1290,originalPrice:1290,link:"#"},
 ];
 
-let cart = JSON.parse(localStorage.getItem('lnCart') || '[]');
-let users = JSON.parse(localStorage.getItem('lnUsers') || '[]');
-let currentUser = JSON.parse(localStorage.getItem('lnCurrentUser') || 'null');
-let globalDiscount = parseFloat(localStorage.getItem('lnDiscount') || '0');
-let promoCodes = JSON.parse(localStorage.getItem('lnPromoCodes') || '[{"code":"WELCOME10","percent":10},{"code":"VIP20","percent":20}]');
-let appliedPromo = null;
-let isAdmin = false;
-let menuOpen = false;
+let cart         = JSON.parse(localStorage.getItem('crCart') || '[]');
+let users        = JSON.parse(localStorage.getItem('crUsers') || '[]');
+let currentUser  = JSON.parse(localStorage.getItem('crCurrentUser') || 'null');
+let globalDisc   = parseFloat(localStorage.getItem('crDiscount') || '0');
+let promoCodes   = JSON.parse(localStorage.getItem('crPromoCodes') || '[{"code":"WELCOME10","percent":10},{"code":"VIP20","percent":20}]');
+let menuOpen     = false;
 
-// Apply discount to products
-function applyDiscountToProducts() {
-  products.forEach(p => {
-    if (globalDiscount > 0) {
-      p.price = Math.round(p.originalPrice * (1 - globalDiscount/100));
-    } else {
-      p.price = p.originalPrice;
-    }
-  });
-}
-applyDiscountToProducts();
+// Apply discount
+products.forEach(p => {
+  if (globalDisc > 0) p.price = Math.round(p.originalPrice * (1 - globalDisc / 100));
+});
 
-// ===== NAVIGATION =====
-function navigate(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + page).classList.add('active');
-  closeMenu();
-  window.scrollTo(0,0);
-  if (page === 'products') renderProducts('all');
-  if (page === 'cart') renderCart();
-  if (page === 'admin') {
-    if (!isAdmin) { openAuth('login'); return; }
-    renderAdminProducts();
-    renderPromoCodes();
-    updateCurrentDiscountLabel();
-  }
-  if (page === 'home') renderFeatured();
-  // Show/hide footer on legal pages
-  const footerPages = ['impressum','datenschutz','agb','widerruf'];
-  document.getElementById('mainFooter').style.display = footerPages.includes(page) ? 'grid' : 'grid';
+function saveCart(){ localStorage.setItem('crCart', JSON.stringify(cart)); updateCount(); }
+function updateCount(){
+  document.getElementById('cartCount').textContent = cart.reduce((s,i) => s + i.qty, 0);
 }
 
-function toggleMenu() {
-  menuOpen = !menuOpen;
-  document.getElementById('hamburger').classList.toggle('open', menuOpen);
-  document.getElementById('navMenu').classList.toggle('open', menuOpen);
-}
-function closeMenu() {
-  menuOpen = false;
-  document.getElementById('hamburger').classList.remove('open');
-  document.getElementById('navMenu').classList.remove('open');
-}
-
-// ===== RENDER HOME FEATURED =====
-function renderFeatured() {
-  const grid = document.getElementById('featuredGrid');
-  const featured = products.slice(0,3);
-  grid.innerHTML = featured.map(p => `
-    <div class="feat-card" onclick="navigate('products')">
+// RENDER FEATURED (first 3 in large grid)
+function renderFeatured(){
+  document.getElementById('featuredGrid').innerHTML = products.slice(0,3).map((p,i) => `
+    <div class="feat-card" onclick="location.href='${p.link}'">
       <div class="feat-img">${p.emoji}</div>
       <div class="feat-overlay">
         <div class="feat-name">${p.name}</div>
         <div class="feat-price">€ ${p.price.toLocaleString('de-DE')}</div>
       </div>
-      ${globalDiscount > 0 ? `<div class="feat-badge">−${globalDiscount}%</div>` : ''}
-    </div>
-  `).join('');
+      ${globalDisc > 0 ? `<div class="feat-tag">−${globalDisc}%</div>` : ''}
+      <button class="feat-btn">ANSEHEN</button>
+    </div>`).join('');
 }
 
-// ===== RENDER PRODUCTS =====
-let currentFilter = 'all';
-function renderProducts(filter) {
-  currentFilter = filter;
-  const grid = document.getElementById('productsGrid');
-  const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
-  grid.innerHTML = filtered.map(p => {
-    const hasDiscount = globalDiscount > 0;
-    return `
-    <div class="product-card">
-      <div class="product-img">${p.emoji}
-        ${hasDiscount ? `<div class="sale-tag" style="display:block">−${globalDiscount}%</div>` : ''}
-      </div>
-      <div class="product-info">
-        <div class="product-cat">${p.cat.toUpperCase()}</div>
-        <div class="product-name">${p.name}</div>
-        <div class="product-price-row">
-          <div class="product-price">€ ${p.price.toLocaleString('de-DE')}</div>
-          ${hasDiscount ? `<div class="product-original" style="display:block">€ ${p.originalPrice.toLocaleString('de-DE')}</div>` : ''}
-          ${hasDiscount ? `<div class="product-discount" style="display:block">−${globalDiscount}%</div>` : ''}
+// RENDER PRODUCT GRID
+function renderProducts(){
+  document.getElementById('productsGrid').innerHTML = products.map(p => `
+    <div class="prod-card" onclick="location.href='${p.link}'">
+      ${globalDisc > 0 ? `<div class="prod-sale">−${globalDisc}%</div>` : ''}
+      <div class="prod-img">${p.emoji}</div>
+      <div class="prod-info">
+        <div class="prod-cat">${p.cat}</div>
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-price">€ ${p.price.toLocaleString('de-DE')}
+          ${globalDisc > 0 ? `<span style="font-size:.65rem;color:var(--gray);text-decoration:line-through;margin-left:6px">€ ${p.originalPrice}</span>` : ''}
         </div>
       </div>
-      <button class="product-add" onclick="addToCart(${p.id})">IN DEN WARENKORB</button>
-    </div>`;
-  }).join('');
+      <button class="prod-add" onclick="event.stopPropagation();addToCart(${p.id})">+ IN DEN WARENKORB</button>
+    </div>`).join('');
 }
 
-function filterProducts(filter, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderProducts(filter);
-}
-
-// ===== CART =====
-function addToCart(productId) {
-  const p = products.find(x => x.id === productId);
-  if (!p) return;
-  const existing = cart.find(x => x.id === productId);
-  if (existing) { existing.qty++; }
-  else { cart.push({ id: p.id, name: p.name, emoji: p.emoji, price: p.price, qty: 1 }); }
+function addToCart(id){
+  const p = products.find(x => x.id === id);
+  if(!p) return;
+  const ex = cart.find(x => x.id === id);
+  if(ex){ ex.qty++; } else { cart.push({...p, qty:1}); }
   saveCart();
-  showToast(`${p.name} wurde hinzugefügt ✦`);
+  showToast(`${p.name} hinzugefügt ✦`);
 }
 
-function saveCart() {
-  localStorage.setItem('lnCart', JSON.stringify(cart));
-  updateCartCount();
+// MENU
+function toggleMenu(){
+  menuOpen = !menuOpen;
+  document.getElementById('hamburger').classList.toggle('open', menuOpen);
+  document.getElementById('navOverlay').classList.toggle('open', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+}
+function closeMenu(){
+  menuOpen = false;
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('navOverlay').classList.remove('open');
+  document.body.style.overflow = '';
 }
 
-function updateCartCount() {
-  const total = cart.reduce((s, i) => s + i.qty, 0);
-  document.getElementById('cartCount').textContent = total;
-}
-
-function renderCart() {
-  const el = document.getElementById('cartContent');
-  if (!cart.length) {
-    el.innerHTML = '<div class="cart-empty">IHR WARENKORB IST LEER</div>'; return;
-  }
-  let subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  let discount = 0;
-  let promoLine = '';
-  if (appliedPromo) {
-    discount = Math.round(subtotal * appliedPromo.percent / 100);
-    promoLine = `<div class="cart-summary-row"><span>AKTIONSCODE (${appliedPromo.code})</span><span style="color:#4CAF50">−€ ${discount.toLocaleString('de-DE')}</span></div>`;
-  }
-  const total = subtotal - discount;
-  el.innerHTML = `
-    <div class="cart-items">
-      ${cart.map(item => `
-      <div class="cart-item">
-        <div class="cart-item-img">${item.emoji}</div>
-        <div class="cart-item-info">
-          <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-price">€ ${item.price.toLocaleString('de-DE')}</div>
-          <div class="cart-qty">
-            <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
-            <span class="qty-num">${item.qty}</span>
-            <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
-          </div>
-        </div>
-        <button class="cart-remove" onclick="removeFromCart(${item.id})">ENTFERNEN</button>
-      </div>`).join('')}
-    </div>
-    <div class="cart-summary">
-      <div class="cart-summary-row"><span>ZWISCHENSUMME</span><span>€ ${subtotal.toLocaleString('de-DE')}</span></div>
-      ${promoLine}
-      <div class="cart-summary-row"><span>VERSAND</span><span>KOSTENLOS</span></div>
-      <div class="cart-total-row"><span>GESAMT</span><span>€ ${total.toLocaleString('de-DE')}</span></div>
-      <button class="checkout-btn" onclick="checkout()">ZUR KASSE</button>
-    </div>`;
-}
-
-function changeQty(id, delta) {
-  const item = cart.find(x => x.id === id);
-  if (!item) return;
-  item.qty += delta;
-  if (item.qty <= 0) cart = cart.filter(x => x.id !== id);
-  saveCart(); renderCart();
-}
-function removeFromCart(id) {
-  cart = cart.filter(x => x.id !== id);
-  saveCart(); renderCart();
-}
-function checkout() {
-  if (!currentUser && !isAdmin) { openAuth('login'); return; }
-  showToast('Vielen Dank für Ihre Bestellung! ✦');
-  cart = []; appliedPromo = null;
-  saveCart(); renderCart();
-}
-
-// ===== PROMO CODE =====
-function applyPromo() {
-  const code = document.getElementById('promoInput').value.trim().toUpperCase();
-  const msgEl = document.getElementById('promoMsg');
-  const errEl = document.getElementById('promoErr');
-  msgEl.style.display = 'none'; errEl.style.display = 'none';
-  const found = promoCodes.find(c => c.code === code);
-  if (found) {
-    appliedPromo = found;
-    msgEl.textContent = `✓ CODE AKTIV – ${found.percent}% RABATT BEIM CHECKOUT`;
-    msgEl.style.display = 'block';
-    showToast(`Aktionscode ${found.code} aktiviert! −${found.percent}%`);
-  } else {
-    errEl.textContent = '✗ UNGÜLTIGER CODE';
-    errEl.style.display = 'block';
-  }
-}
-
-// ===== AUTH =====
-function openAuth(type) {
+// AUTH
+function openAuth(type){
   document.getElementById('authModal').classList.add('open');
-  if (type === 'register') { switchToRegister(); } else { switchToLogin(); }
+  type === 'register' ? switchToRegister() : switchToLogin();
   closeMenu();
 }
-function closeAuth() {
-  document.getElementById('authModal').classList.remove('open');
-}
-function switchToRegister() {
+function closeAuth(){ document.getElementById('authModal').classList.remove('open'); }
+function switchToRegister(){
   document.getElementById('loginForm').style.display = 'none';
   document.getElementById('registerForm').style.display = 'block';
 }
-function switchToLogin() {
+function switchToLogin(){
   document.getElementById('loginForm').style.display = 'block';
   document.getElementById('registerForm').style.display = 'none';
 }
-
-function doLogin() {
+function doLogin(){
   const email = document.getElementById('loginEmail').value.trim();
-  const pass = document.getElementById('loginPassword').value;
-  const msg = document.getElementById('loginMsg');
-
-  // Admin check
-  if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {
-    isAdmin = true;
-    currentUser = { name: 'Admin', email: ADMIN_EMAIL, isAdmin: true };
-    localStorage.setItem('lnCurrentUser', JSON.stringify(currentUser));
-    msg.style.color = '#4CAF50'; msg.textContent = '✓ Admin-Login erfolgreich';
-    setTimeout(() => { closeAuth(); navigate('admin'); updateUserUI(); }, 800);
+  const pass  = document.getElementById('loginPassword').value;
+  const msg   = document.getElementById('loginMsg');
+  if(email === ADMIN_EMAIL && pass === ADMIN_PASS){
+    currentUser = {name:'Admin', email:ADMIN_EMAIL, isAdmin:true};
+    localStorage.setItem('crCurrentUser', JSON.stringify(currentUser));
+    msg.style.color = '#4CAF50'; msg.textContent = '✓ Willkommen Admin!';
+    setTimeout(() => { closeAuth(); updateUserUI(); location.href='admin.html'; }, 800);
     return;
   }
-
-  // User check
-  const user = users.find(u => u.email === email && u.password === pass);
-  if (user) {
-    currentUser = user;
-    localStorage.setItem('lnCurrentUser', JSON.stringify(currentUser));
-    msg.style.color = '#4CAF50'; msg.textContent = `✓ Willkommen, ${user.name}!`;
-    setTimeout(() => { closeAuth(); updateUserUI(); showToast(`Willkommen zurück, ${user.name}! ✦`); }, 800);
+  const u = users.find(x => x.email === email && x.password === pass);
+  if(u){
+    currentUser = u; localStorage.setItem('crCurrentUser', JSON.stringify(u));
+    msg.style.color = '#4CAF50'; msg.textContent = `✓ Willkommen, ${u.name}!`;
+    setTimeout(() => { closeAuth(); updateUserUI(); showToast(`Willkommen zurück, ${u.name}! ✦`); }, 800);
   } else {
     msg.style.color = '#f44336'; msg.textContent = '✗ E-Mail oder Passwort falsch';
   }
 }
-
-function doRegister() {
+function doRegister(){
   const name = document.getElementById('regName').value.trim();
   const email = document.getElementById('regEmail').value.trim();
-  const pass = document.getElementById('regPassword').value;
-  const msg = document.getElementById('registerMsg');
-  if (!name || !email || !pass) { msg.style.color='#f44336'; msg.textContent='Bitte alle Felder ausfüllen'; return; }
-  if (pass.length < 6) { msg.style.color='#f44336'; msg.textContent='Passwort min. 6 Zeichen'; return; }
-  if (users.find(u => u.email === email)) { msg.style.color='#f44336'; msg.textContent='E-Mail bereits registriert'; return; }
-  const newUser = { name, email, password: pass };
-  users.push(newUser);
-  localStorage.setItem('lnUsers', JSON.stringify(users));
-  currentUser = newUser;
-  localStorage.setItem('lnCurrentUser', JSON.stringify(currentUser));
-  msg.style.color = '#4CAF50'; msg.textContent = `✓ Konto erstellt! Willkommen, ${name}!`;
+  const pass  = document.getElementById('regPassword').value;
+  const msg   = document.getElementById('registerMsg');
+  if(!name || !email || !pass){ msg.style.color='#f44336'; msg.textContent='Bitte alle Felder ausfüllen'; return; }
+  if(pass.length < 6){ msg.style.color='#f44336'; msg.textContent='Passwort min. 6 Zeichen'; return; }
+  if(users.find(u => u.email === email)){ msg.style.color='#f44336'; msg.textContent='E-Mail bereits registriert'; return; }
+  const nu = {name, email, password:pass};
+  users.push(nu); localStorage.setItem('crUsers', JSON.stringify(users));
+  currentUser = nu; localStorage.setItem('crCurrentUser', JSON.stringify(nu));
+  msg.style.color = '#4CAF50'; msg.textContent = `✓ Willkommen, ${name}!`;
   setTimeout(() => { closeAuth(); updateUserUI(); showToast(`Herzlich willkommen, ${name}! ✦`); }, 800);
 }
-
-function updateUserUI() {
-  const ind = document.getElementById('userIndicator');
-  const btn = document.getElementById('authNavBtn');
-  if (currentUser) {
-    if (currentUser.isAdmin) {
-      ind.textContent = '⚙ ADMIN';
-      ind.style.display = 'block';
-      btn.textContent = 'ADMIN PANEL';
-      btn.onclick = () => navigate('admin');
-    } else {
-      ind.textContent = currentUser.name.toUpperCase();
-      ind.style.display = 'block';
-      btn.textContent = 'ABMELDEN';
-      btn.onclick = doLogout;
-    }
+function updateUserUI(){
+  const ind = document.getElementById('headerUser');
+  const btn = document.getElementById('navAuthBtn');
+  if(currentUser){
+    ind.textContent = currentUser.isAdmin ? '⚙ ADMIN' : currentUser.name.toUpperCase();
+    ind.style.display = 'block';
+    btn.textContent = currentUser.isAdmin ? 'ADMIN PANEL' : 'ABMELDEN';
+    btn.href = currentUser.isAdmin ? 'admin.html' : '#';
+    if(!currentUser.isAdmin) btn.onclick = (e) => { e.preventDefault(); doLogout(); };
   } else {
     ind.style.display = 'none';
     btn.textContent = 'ANMELDEN';
-    btn.onclick = () => openAuth('login');
+    btn.href = '#'; btn.onclick = (e) => { e.preventDefault(); openAuth('login'); };
+  }
+}
+function doLogout(){
+  currentUser = null; localStorage.removeItem('crCurrentUser');
+  updateUserUI(); closeMenu(); showToast('Sie wurden abgemeldet');
+}
+
+// NEWSLETTER
+function nlSubmit(btn){
+  const input = btn.previousElementSibling;
+  if(!input.value.includes('@')){ showToast('Bitte gültige E-Mail eingeben'); return; }
+  showToast('Vielen Dank für Ihre Anmeldung! ✦');
+  input.value = '';
+}
+
+// COOKIE
+function cookieAccept(){
+  localStorage.setItem('crCookies', 'accepted');
+  document.getElementById('cookieBanner').classList.remove('visible');
+}
+function cookieDecline(){
+  localStorage.setItem('crCookies', 'declined');
+  document.getElementById('cookieBanner').classList.remove('visible');
+}
+function initCookie(){
+  if(!localStorage.getItem('crCookies')){
+    setTimeout(() => document.getElementById('cookieBanner').classList.add('visible'), 1500);
   }
 }
 
-function doLogout() {
-  currentUser = null; isAdmin = false;
-  localStorage.removeItem('lnCurrentUser');
-  updateUserUI(); closeMenu();
-  showToast('Sie wurden abgemeldet');
-}
-
-// ===== ADMIN =====
-function adminLogout() {
-  currentUser = null; isAdmin = false;
-  localStorage.removeItem('lnCurrentUser');
-  updateUserUI(); navigate('home');
-}
-
-function switchAdminTab(tab, btn) {
-  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('admin-' + tab).classList.add('active');
-}
-
-function renderAdminProducts() {
-  const tbody = document.getElementById('adminProductsTable');
-  tbody.innerHTML = products.map(p => `
-    <tr id="row-${p.id}">
-      <td><span id="emoji-${p.id}">${p.emoji}</span></td>
-      <td><span id="name-${p.id}">${p.name}</span></td>
-      <td><span id="cat-${p.id}">${p.cat}</span></td>
-      <td><span id="price-${p.id}">€ ${p.originalPrice}</span></td>
-      <td>
-        <button class="admin-edit-btn" id="editBtn-${p.id}" onclick="editProduct(${p.id})">BEARBEITEN</button>
-        <button class="admin-save-btn" id="saveBtn-${p.id}" onclick="saveProduct(${p.id})">SPEICHERN</button>
-      </td>
-    </tr>`).join('');
-}
-
-function editProduct(id) {
-  const p = products.find(x => x.id === id);
-  document.getElementById(`emoji-${id}`).innerHTML = `<input class="inline-input" id="ei-emoji-${id}" value="${p.emoji}" style="width:60px">`;
-  document.getElementById(`name-${id}`).innerHTML = `<input class="inline-input" id="ei-name-${id}" value="${p.name}">`;
-  document.getElementById(`cat-${id}`).innerHTML = `<input class="inline-input" id="ei-cat-${id}" value="${p.cat}" style="width:100px">`;
-  document.getElementById(`price-${id}`).innerHTML = `<input class="inline-input" id="ei-price-${id}" value="${p.originalPrice}" type="number" style="width:100px">`;
-  document.getElementById(`editBtn-${id}`).style.display = 'none';
-  document.getElementById(`saveBtn-${id}`).style.display = 'inline-block';
-}
-
-function saveProduct(id) {
-  const p = products.find(x => x.id === id);
-  p.emoji = document.getElementById(`ei-emoji-${id}`).value;
-  p.name = document.getElementById(`ei-name-${id}`).value;
-  p.cat = document.getElementById(`ei-cat-${id}`).value;
-  p.originalPrice = parseFloat(document.getElementById(`ei-price-${id}`).value) || p.originalPrice;
-  applyDiscountToProducts();
-  renderAdminProducts();
-  showToast(`${p.name} gespeichert ✦`);
-}
-
-function applyGlobalDiscount() {
-  const val = parseFloat(document.getElementById('globalDiscountInput').value);
-  if (isNaN(val) || val < 0 || val > 90) { showToast('Ungültiger Rabattwert'); return; }
-  globalDiscount = val;
-  localStorage.setItem('lnDiscount', val);
-  applyDiscountToProducts();
-  updateCurrentDiscountLabel();
-  showToast(`${val}% Rabatt auf alle Produkte aktiv ✦`);
-}
-
-function removeGlobalDiscount() {
-  globalDiscount = 0;
-  localStorage.setItem('lnDiscount', '0');
-  applyDiscountToProducts();
-  updateCurrentDiscountLabel();
-  showToast('Rabatt entfernt');
-}
-
-function updateCurrentDiscountLabel() {
-  const el = document.getElementById('currentDiscount');
-  el.textContent = globalDiscount > 0 ? `✓ Aktueller Rabatt: ${globalDiscount}% auf alle Produkte` : 'Kein aktiver globaler Rabatt';
-}
-
-function renderPromoCodes() {
-  const list = document.getElementById('promoCodesList');
-  if (!promoCodes.length) { list.innerHTML = '<p style="font-size:0.75rem;color:var(--gray);letter-spacing:1px">Keine aktiven Codes</p>'; return; }
-  list.innerHTML = promoCodes.map(c => `
-    <div class="discount-item">
-      <span><span class="discount-code">${c.code}</span> — ${c.percent}% Rabatt</span>
-      <button class="discount-del" onclick="deleteCode('${c.code}')">× LÖSCHEN</button>
-    </div>`).join('');
-}
-
-function addPromoCode() {
-  const code = document.getElementById('newCodeName').value.trim().toUpperCase();
-  const percent = parseFloat(document.getElementById('newCodePercent').value);
-  if (!code || isNaN(percent) || percent < 1 || percent > 90) { showToast('Ungültige Eingabe'); return; }
-  if (promoCodes.find(c => c.code === code)) { showToast('Code existiert bereits'); return; }
-  promoCodes.push({ code, percent });
-  localStorage.setItem('lnPromoCodes', JSON.stringify(promoCodes));
-  renderPromoCodes();
-  document.getElementById('newCodeName').value = '';
-  document.getElementById('newCodePercent').value = '';
-  showToast(`Code ${code} erstellt ✦`);
-}
-
-function deleteCode(code) {
-  promoCodes = promoCodes.filter(c => c.code !== code);
-  localStorage.setItem('lnPromoCodes', JSON.stringify(promoCodes));
-  renderPromoCodes();
-  showToast(`Code ${code} gelöscht`);
-}
-
-// ===== TOAST =====
-function showToast(msg) {
+// TOAST
+function showToast(msg){
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
-// ===== INIT =====
-updateCartCount();
-updateUserUI();
-if (currentUser && currentUser.isAdmin) { isAdmin = true; }
-renderFeatured();
+// MODAL CLOSE ON OVERLAY
+document.getElementById('authModal').addEventListener('click', function(e){ if(e.target===this) closeAuth(); });
 
-// Close modal on overlay click
-document.getElementById('authModal').addEventListener('click', function(e) {
-  if (e.target === this) closeAuth();
-});
+// INIT
+updateCount(); updateUserUI(); renderFeatured(); renderProducts(); initCookie();
 </script>
 </body>
 </html>
