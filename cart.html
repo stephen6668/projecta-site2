@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Warenkorb – LUXE NOIR</title>
+<title>Warenkorb – Chevalier & Roth</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Josefin+Sans:wght@100;300;400&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#C9A84C;--gold-light:#E8C96A;--black:#0A0A0A;--black-soft:#141414;--black-card:#1A1A1A;--white:#F5F0E8;--gray:#888;}
+:root{--gold:#AE9666;--gold-light:#C8AE88;--black:#0A0A0A;--black-soft:#141414;--black-card:#1A1A1A;--white:#F5F0E8;--gray:#888;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--black);color:var(--white);font-family:'Josefin Sans',sans-serif;font-weight:300;min-height:100vh;}
 
 /* HEADER */
-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,0.97);border-bottom:1px solid rgba(201,168,76,0.3);padding:0 2rem;height:70px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(10px);}
+header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,0.97);border-bottom:1px solid rgba(174,150,102,0.3);padding:0 2rem;height:70px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(10px);}
 .logo-area{display:flex;align-items:center;gap:12px;cursor:pointer;text-decoration:none;}
 .logo-img{width:44px;height:44px;object-fit:contain;}
 .logo-placeholder{width:44px;height:44px;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold);font-style:italic;}
 .logo-text{font-family:'Cormorant Garamond',serif;font-size:1.5rem;letter-spacing:6px;color:var(--gold);font-weight:300;}
 .header-actions{display:flex;align-items:center;gap:1.5rem;}
-.cart-btn{background:none;border:1px solid rgba(201,168,76,0.4);color:var(--gold);padding:8px 16px;font-family:'Josefin Sans',sans-serif;font-size:0.7rem;letter-spacing:2px;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:8px;}
-.cart-btn:hover{background:rgba(201,168,76,0.1);border-color:var(--gold);}
+.cart-btn{background:none;border:1px solid rgba(174,150,102,0.4);color:var(--gold);padding:8px 16px;font-family:'Josefin Sans',sans-serif;font-size:0.7rem;letter-spacing:2px;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:8px;}
+.cart-btn:hover{background:rgba(174,150,102,0.1);border-color:var(--gold);}
 .cart-count{background:var(--gold);color:var(--black);border-radius:50%;width:18px;height:18px;font-size:.65rem;display:flex;align-items:center;justify-content:center;}
 .hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:5px;background:none;border:none;}
 .hamburger span{display:block;width:26px;height:1.5px;background:var(--gold);transition:all .3s;}
@@ -27,11 +27,11 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10
 .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
 
 /* NAV */
-.nav-menu{position:fixed;top:70px;left:0;right:0;bottom:0;background:rgba(10,10,10,0.99);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;transform:translateX(-100%);transition:transform .5s cubic-bezier(.77,0,.18,1);border-top:1px solid rgba(201,168,76,0.2);}
+.nav-menu{position:fixed;top:70px;left:0;right:0;bottom:0;background:rgba(10,10,10,0.99);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;transform:translateX(-100%);transition:transform .5s cubic-bezier(.77,0,.18,1);border-top:1px solid rgba(174,150,102,0.2);}
 .nav-menu.open{transform:translateX(0);}
 .nav-menu a{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:var(--white);text-decoration:none;letter-spacing:8px;transition:color .3s;position:relative;}
 .nav-menu a:hover{color:var(--gold);}
-.nav-divider{width:40px;height:1px;background:rgba(201,168,76,0.3);}
+.nav-divider{width:40px;height:1px;background:rgba(174,150,102,0.3);}
 
 /* BREADCRUMB */
 .breadcrumb{padding:90px 3rem 0;font-size:.6rem;letter-spacing:3px;color:var(--gray);}
@@ -41,15 +41,15 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10
 
 /* MAIN */
 .cart-container{max-width:1000px;margin:0 auto;padding:3rem 2rem 6rem;}
-.cart-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(201,168,76,0.2);}
+.cart-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(174,150,102,0.2);}
 .cart-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3rem);letter-spacing:8px;font-weight:300;}
 .cart-title span{color:var(--gold);font-style:italic;}
 .cart-meta{font-size:.65rem;letter-spacing:2px;color:var(--gray);}
 
 /* PROMO */
-.promo-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;padding:1.2rem 1.5rem;border:1px solid rgba(201,168,76,0.2);background:rgba(201,168,76,0.03);margin-bottom:2rem;}
+.promo-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;padding:1.2rem 1.5rem;border:1px solid rgba(174,150,102,0.2);background:rgba(174,150,102,0.03);margin-bottom:2rem;}
 .promo-label{font-size:.6rem;letter-spacing:3px;color:var(--gold);}
-.promo-input{background:none;border:none;border-bottom:1px solid rgba(201,168,76,0.4);color:var(--white);padding:6px 8px;width:160px;font-family:'Josefin Sans',sans-serif;font-size:.75rem;letter-spacing:2px;outline:none;text-transform:uppercase;}
+.promo-input{background:none;border:none;border-bottom:1px solid rgba(174,150,102,0.4);color:var(--white);padding:6px 8px;width:160px;font-family:'Josefin Sans',sans-serif;font-size:.75rem;letter-spacing:2px;outline:none;text-transform:uppercase;}
 .promo-input::placeholder{color:var(--gray);text-transform:none;}
 .promo-btn{background:var(--gold);color:var(--black);border:none;padding:8px 20px;font-family:'Josefin Sans',sans-serif;font-size:.65rem;letter-spacing:2px;cursor:pointer;transition:background .3s;}
 .promo-btn:hover{background:var(--gold-light);}
@@ -58,14 +58,14 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10
 .promo-err{color:#f44336;}
 
 /* ITEMS */
-.cart-items{border-top:1px solid rgba(201,168,76,0.15);}
+.cart-items{border-top:1px solid rgba(174,150,102,0.15);}
 .cart-empty{text-align:center;padding:6rem 0;}
 .cart-empty p{font-size:.8rem;letter-spacing:3px;color:var(--gray);margin-bottom:2rem;}
 .empty-icon{font-size:4rem;margin-bottom:1.5rem;opacity:.2;}
 .continue-btn{display:inline-block;padding:14px 40px;border:1px solid var(--gold);color:var(--gold);font-family:'Josefin Sans',sans-serif;font-size:.7rem;letter-spacing:4px;cursor:pointer;background:none;transition:all .3s;text-decoration:none;}
 .continue-btn:hover{background:var(--gold);color:var(--black);}
 
-.cart-item{display:grid;grid-template-columns:90px 1fr auto;gap:1.5rem;align-items:start;padding:1.8rem 0;border-bottom:1px solid rgba(201,168,76,0.1);animation:fadeIn .4s ease;}
+.cart-item{display:grid;grid-template-columns:90px 1fr auto;gap:1.5rem;align-items:start;padding:1.8rem 0;border-bottom:1px solid rgba(174,150,102,0.1);animation:fadeIn .4s ease;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .item-img{width:90px;height:120px;background:var(--black-card);display:flex;align-items:center;justify-content:center;font-size:3rem;flex-shrink:0;cursor:pointer;transition:opacity .3s;}
 .item-img:hover{opacity:.8;}
@@ -75,8 +75,8 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10
 .item-name:hover{color:var(--gold);}
 .item-color{font-size:.6rem;letter-spacing:2px;color:var(--gray);margin-bottom:12px;}
 .item-qty{display:flex;align-items:center;gap:12px;}
-.qty-btn{width:28px;height:28px;border:1px solid rgba(201,168,76,0.4);background:none;color:var(--gold);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;}
-.qty-btn:hover{background:rgba(201,168,76,0.1);}
+.qty-btn{width:28px;height:28px;border:1px solid rgba(174,150,102,0.4);background:none;color:var(--gold);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.qty-btn:hover{background:rgba(174,150,102,0.1);}
 .qty-num{font-size:.8rem;letter-spacing:1px;min-width:24px;text-align:center;}
 .item-remove{font-size:.6rem;letter-spacing:2px;color:var(--gray);background:none;border:none;cursor:pointer;transition:color .3s;margin-top:10px;display:block;padding:0;}
 .item-remove:hover{color:#f44336;}
@@ -89,7 +89,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10
 @media(max-width:768px){.cart-layout{grid-template-columns:1fr;}.cart-item{grid-template-columns:80px 1fr auto;gap:1rem;}}
 
 /* SUMMARY */
-.summary-box{border:1px solid rgba(201,168,76,0.2);background:var(--black-card);padding:2rem;position:sticky;top:90px;}
+.summary-box{border:1px solid rgba(174,150,102,0.2);background:var(--black-card);padding:2rem;position:sticky;top:90px;}
 .summary-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:5px;font-weight:300;margin-bottom:1.5rem;color:var(--white);}
 .summary-row{display:flex;justify-content:space-between;padding:10px 0;font-size:.72rem;letter-spacing:1px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--gray);}
 .summary-row.discount{color:#4CAF50;}
@@ -102,7 +102,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10
 .pay-icon{border:1px solid rgba(255,255,255,0.1);padding:5px 12px;font-size:.6rem;letter-spacing:1px;color:var(--gray);}
 
 /* FOOTER */
-footer{border-top:1px solid rgba(201,168,76,0.2);padding:3rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;}
+footer{border-top:1px solid rgba(174,150,102,0.2);padding:3rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;}
 .footer-copy{font-size:.6rem;letter-spacing:1px;color:var(--gray);}
 .footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
 .footer-links a{font-size:.6rem;letter-spacing:1px;color:var(--gray);text-decoration:none;transition:color .3s;}
@@ -115,12 +115,12 @@ footer{border-top:1px solid rgba(201,168,76,0.2);padding:3rem;display:flex;flex-
 /* AUTH MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:2000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
 .modal-overlay.open{display:flex;}
-.modal{background:var(--black-card);border:1px solid rgba(201,168,76,0.3);padding:3rem;width:100%;max-width:440px;position:relative;}
+.modal{background:var(--black-card);border:1px solid rgba(174,150,102,0.3);padding:3rem;width:100%;max-width:440px;position:relative;}
 .modal-close{position:absolute;top:1rem;right:1.5rem;background:none;border:none;color:var(--gray);font-size:1.5rem;cursor:pointer;}
 .modal-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;letter-spacing:5px;font-weight:300;color:var(--gold);margin-bottom:2rem;text-align:center;}
 .form-group{margin-bottom:1.5rem;}
 .form-label{display:block;font-size:.6rem;letter-spacing:3px;color:var(--gray);margin-bottom:8px;}
-.form-input{width:100%;background:rgba(255,255,255,.03);border:none;border-bottom:1px solid rgba(201,168,76,0.3);color:var(--white);padding:10px 4px;font-family:'Josefin Sans',sans-serif;font-size:.85rem;outline:none;transition:border-color .3s;letter-spacing:1px;}
+.form-input{width:100%;background:rgba(255,255,255,.03);border:none;border-bottom:1px solid rgba(174,150,102,0.3);color:var(--white);padding:10px 4px;font-family:'Josefin Sans',sans-serif;font-size:.85rem;outline:none;transition:border-color .3s;letter-spacing:1px;}
 .form-input:focus{border-color:var(--gold);}
 .form-btn{width:100%;background:var(--gold);color:var(--black);border:none;padding:14px;font-family:'Josefin Sans',sans-serif;font-size:.7rem;letter-spacing:4px;cursor:pointer;transition:background .3s;}
 .form-btn:hover{background:var(--gold-light);}
@@ -133,9 +133,9 @@ footer{border-top:1px solid rgba(201,168,76,0.2);padding:3rem;display:flex;flex-
 
 <header>
   <a class="logo-area" href="index.html">
-    <img src="logo.png" alt="LUXE NOIR" class="logo-img" onerror="this.style.display='none';document.getElementById('logofallback').style.display='flex'">
+    <img src="logo.png" alt="Chevalier & Roth" class="logo-img" onerror="this.style.display='none';document.getElementById('logofallback').style.display='flex'">
     <div class="logo-placeholder" id="logofallback" style="display:none">L</div>
-    <span class="logo-text">LUXE NOIR</span>
+    <span class="logo-text">Chevalier & Roth</span>
   </a>
   <div class="header-actions">
     <button class="cart-btn" onclick="window.location='cart.html'">
@@ -180,7 +180,7 @@ footer{border-top:1px solid rgba(201,168,76,0.2);padding:3rem;display:flex;flex-
 </div>
 
 <footer>
-  <span class="footer-copy">© 2025 LUXE NOIR GmbH. Alle Rechte vorbehalten.</span>
+  <span class="footer-copy">© 2025 Chevalier & Roth GmbH. Alle Rechte vorbehalten.</span>
   <div class="footer-links">
     <a href="impressum.html">Impressum</a>
     <a href="datenschutz.html">Datenschutz</a>
@@ -211,15 +211,15 @@ footer{border-top:1px solid rgba(201,168,76,0.2);padding:3rem;display:flex;flex-
 <div class="toast" id="toast"></div>
 
 <script>
-const ADMIN_EMAIL="admin@luxenoir.de";
+const ADMIN_EMAIL="admin@chevalier-roth.de";
 const ADMIN_PASS="LuxeAdmin2025!";
-let cart=JSON.parse(localStorage.getItem('lnCart')||'[]');
-let promoCodes=JSON.parse(localStorage.getItem('lnPromoCodes')||'[{"code":"WELCOME10","percent":10},{"code":"VIP20","percent":20}]');
-let appliedPromo=JSON.parse(localStorage.getItem('lnAppliedPromo')||'null');
-let users=JSON.parse(localStorage.getItem('lnUsers')||'[]');
-let currentUser=JSON.parse(localStorage.getItem('lnCurrentUser')||'null');
+let cart=JSON.parse(localStorage.getItem('crCart')||'[]');
+let promoCodes=JSON.parse(localStorage.getItem('crPromoCodes')||'[{"code":"WELCOME10","percent":10},{"code":"VIP20","percent":20}]');
+let appliedPromo=JSON.parse(localStorage.getItem('crAppliedPromo')||'null');
+let users=JSON.parse(localStorage.getItem('crUsers')||'[]');
+let currentUser=JSON.parse(localStorage.getItem('crCurrentUser')||'null');
 
-function saveCart(){localStorage.setItem('lnCart',JSON.stringify(cart));updateCount();}
+function saveCart(){localStorage.setItem('crCart',JSON.stringify(cart));updateCount();}
 function updateCount(){
   const t=cart.reduce((s,i)=>s+i.qty,0);
   document.getElementById('cartCount').textContent=t;
@@ -313,7 +313,7 @@ function checkout(){
   if(!currentUser){openAuth();return;}
   showToast('Vielen Dank für Ihre Bestellung! ✦');
   cart=[];appliedPromo=null;
-  localStorage.removeItem('lnAppliedPromo');
+  localStorage.removeItem('crAppliedPromo');
   saveCart();renderCart();
 }
 function applyPromo(){
@@ -322,7 +322,7 @@ function applyPromo(){
   const found=promoCodes.find(c=>c.code===code);
   if(found){
     appliedPromo=found;
-    localStorage.setItem('lnAppliedPromo',JSON.stringify(found));
+    localStorage.setItem('crAppliedPromo',JSON.stringify(found));
     msg.textContent='✓ CODE AKTIV – '+found.percent+'% RABATT';
     msg.className='promo-msg promo-ok';
     renderCart();showToast('Code '+found.code+' aktiviert! −'+found.percent+'%');
@@ -341,12 +341,12 @@ function doLogin(){
   const msg=document.getElementById('loginMsg');
   if(e===ADMIN_EMAIL&&p===ADMIN_PASS){
     currentUser={name:'Admin',email:ADMIN_EMAIL,isAdmin:true};
-    localStorage.setItem('lnCurrentUser',JSON.stringify(currentUser));
+    localStorage.setItem('crCurrentUser',JSON.stringify(currentUser));
     msg.style.color='#4CAF50';msg.textContent='✓ Willkommen Admin!';
     setTimeout(()=>{closeAuth();renderCart();},600);return;
   }
   const u=users.find(x=>x.email===e&&x.password===p);
-  if(u){currentUser=u;localStorage.setItem('lnCurrentUser',JSON.stringify(u));msg.style.color='#4CAF50';msg.textContent='✓ Willkommen, '+u.name+'!';setTimeout(()=>{closeAuth();},600);}
+  if(u){currentUser=u;localStorage.setItem('crCurrentUser',JSON.stringify(u));msg.style.color='#4CAF50';msg.textContent='✓ Willkommen, '+u.name+'!';setTimeout(()=>{closeAuth();},600);}
   else{msg.style.color='#f44336';msg.textContent='✗ E-Mail oder Passwort falsch';}
 }
 
