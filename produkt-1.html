@@ -85,6 +85,7 @@ footer{border-top:1px solid rgba(174,150,102,0.2);padding:3rem;display:flex;flex
 .toast{position:fixed;bottom:2rem;right:2rem;z-index:3000;background:var(--black-card);border:1px solid var(--gold);padding:1rem 1.5rem;font-size:.7rem;letter-spacing:2px;color:var(--gold);transform:translateY(100px);opacity:0;transition:all .4s;pointer-events:none;}
 .toast.show{transform:translateY(0);opacity:1;}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.1/dist/iife/sdk.js"></script>
 </head>
 <body>
 
@@ -198,6 +199,10 @@ footer{border-top:1px solid rgba(174,150,102,0.2);padding:3rem;display:flex;flex
 
 <script>
 const PRODUCT={id:1,name:'Abendkleid Noir',emoji:'👗',cat:'damen',price:389,originalPrice:389};
+const AW_ENDPOINT="https://fra.cloud.appwrite.io/v1";
+const AW_PROJECT_ID="6a2bef64001707bac3a9";
+const _awclient=new Appwrite.Client().setEndpoint(AW_ENDPOINT).setProject(AW_PROJECT_ID);
+const _awaccount=new Appwrite.Account(_awclient);
 let cart=JSON.parse(localStorage.getItem('crCart')||'[]');
 let selectedSize=null;
 let menuOpen=false;
@@ -231,13 +236,14 @@ function addToCart(){
   else{cart.push({...PRODUCT,qty:1});}
   localStorage.setItem('crCart',JSON.stringify(cart));
   updateCount();
+(async()=>{try{const u=await _awaccount.get();const hi=document.createElement("span");hi.style.cssText="position:fixed;top:22px;right:130px;font-size:.58rem;letter-spacing:2px;color:#AE9666;z-index:1001";hi.textContent=u.name?u.name.split(" ")[0].toUpperCase():"KONTO";document.body.appendChild(hi);}catch(e){}})();
   showToast('Abendkleid Noir hinzugefügt ✦');
 }
 
 function toggleMenu(){menuOpen=!menuOpen;document.getElementById('hamburger').classList.toggle('open',menuOpen);document.getElementById('navMenu').classList.toggle('open',menuOpen);}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
 updateCount();
+(async()=>{try{const u=await _awaccount.get();const hi=document.createElement("span");hi.style.cssText="position:fixed;top:22px;right:130px;font-size:.58rem;letter-spacing:2px;color:#AE9666;z-index:1001";hi.textContent=u.name?u.name.split(" ")[0].toUpperCase():"KONTO";document.body.appendChild(hi);}catch(e){}})();
 </script>
 </body>
 </html>
-
