@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin – Chevalier &amp; Roth</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Josefin+Sans:wght@100;300;400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/appwrite@14.0.1/dist/iife/sdk.js"></script>
+<style>
+:root{--gold:#AE9666;--gold-light:#C8AE88;--black:#0A0A0A;--black-card:#1A1A1A;--black-soft:#141414;--white:#F5F0E8;--gray:#888;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--black);color:var(--white);font-family:'Josefin Sans',sans-serif;font-weight:300;min-height:100vh;}
+
+/* ── LOADING & LOCK ── */
+.screen{position:fixed;inset:0;background:var(--black);z-index:9000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.2rem;}
+.screen.hidden{display:none;}
+.spinner{width:34px;height:34px;border:2px solid rgba(174,150,102,.25);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.screen p{font-size:.6rem;letter-spacing:3px;color:var(--gray);}
+
+/* ── ADMIN LOGIN ── */
+.admin-login{position:fixed;inset:0;background:var(--black);z-index:8000;display:flex;align-items:center;justify-content:center;}
+.admin-login.hidden{display:none;}
+.al-box{background:var(--black-card);border:1px solid rgba(174,150,102,.25);padding:3rem;width:100%;max-width:420px;text-align:center;}
+.al-icon{font-size:2rem;margin-bottom:1rem;color:var(--gold);}
+.al-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;letter-spacing:5px;color:var(--gold);margin-bottom:.5rem;}
+.al-sub{font-size:.6rem;letter-spacing:3px;color:var(--gray);margin-bottom:2rem;}
+.fg{margin-bottom:1.3rem;text-align:left;}
+.fl{display:block;font-size:.56rem;letter-spacing:3px;color:var(--gray);margin-bottom:7px;}
+.fi{width:100%;background:rgba(255,255,255,.02);border:none;border-bottom:1px solid rgba(174,150,102,.3);color:var(--white);padding:9px 4px;font-family:'Josefin Sans',sans-serif;font-size:.82rem;outline:none;transition:border-color .3s;letter-spacing:1px;}
+.fi:focus{border-color:var(--gold);}
+.fb{width:100%;background:var(--gold);color:var(--black);border:none;padding:13px;font-family:'Josefin Sans',sans-serif;font-size:.68rem;letter-spacing:4px;cursor:pointer;transition:background .3s;}
+.fb:hover{background:var(--gold-light);}
+.fmsg{font-size:.65rem;text-align:center;margin-top:.8rem;letter-spacing:1px;min-height:18px;}
+/* First-time register hint */
+.first-time-note{font-size:.62rem;color:var(--gray);letter-spacing:1px;margin-top:1rem;line-height:1.8;}
+.first-time-note strong{color:var(--gold);}
+
+/* ── SIDEBAR ── */
+.admin-layout{display:grid;grid-template-columns:230px 1fr;min-height:100vh;}
+.sidebar{background:var(--black-soft);border-right:1px solid rgba(174,150,102,.15);padding:2rem 0;position:sticky;top:0;height:100vh;overflow-y:auto;}
+.sidebar-logo{padding:0 1.5rem 2rem;border-bottom:1px solid rgba(174,150,102,.1);margin-bottom:1.5rem;}
+.sidebar-logo .lt{font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:3px;color:var(--gold);}
+.sidebar-logo small{display:block;font-size:.48rem;letter-spacing:4px;color:var(--gray);margin-top:2px;}
+.sidebar-badge{display:inline-block;background:rgba(174,150,102,.15);border:1px solid rgba(174,150,102,.3);color:var(--gold);font-size:.48rem;letter-spacing:2px;padding:2px 8px;margin-top:.5rem;}
+.s-nav a{display:flex;align-items:center;gap:.8rem;padding:.8rem 1.5rem;font-size:.62rem;letter-spacing:2px;color:var(--gray);text-decoration:none;cursor:pointer;transition:all .25s;border-left:2px solid transparent;}
+.s-nav a:hover,.s-nav a.active{color:var(--gold);background:rgba(174,150,102,.05);border-left-color:var(--gold);}
+.s-nav a span{font-size:.9rem;width:18px;text-align:center;}
+.s-nav .divider{height:1px;background:rgba(174,150,102,.08);margin:.5rem 1.5rem;}
+.sidebar-logout{margin:2rem 1.5rem 0;background:none;border:1px solid rgba(174,150,102,.2);color:var(--gray);padding:9px;width:calc(100%-3rem);font-family:'Josefin Sans',sans-serif;font-size:.6rem;letter-spacing:2px;cursor:pointer;transition:all .3s;width:calc(100% - 3rem);}
+.sidebar-logout:hover{border-color:#f44336;color:#f44336;}
+
+/* ── MAIN ── */
+.admin-main{padding:2.5rem 3rem;}
+.panel{display:none;}
+.panel.active{display:block;}
+.panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid rgba(174,150,102,.2);}
+.panel-title{font-family:'Cormorant Garamond',serif;font-size:1.8rem;letter-spacing:6px;font-weight:300;color:var(--gold);}
+.panel-sub{font-size:.6rem;letter-spacing:2px;color:var(--gray);margin-top:.3rem;}
+
+/* ── CARDS / STATS ── */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:2rem;}
+.stat-card{background:var(--black-card);border:1px solid rgba(174,150,102,.12);padding:1.5rem;}
+.sc-num{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold);letter-spacing:2px;}
+.sc-label{font-size:.56rem;letter-spacing:3px;color:var(--gray);margin-top:.3rem;}
+
+/* ── PRODUCT TABLE ── */
+.table-wrap{overflow-x:auto;}
+.a-table{width:100%;border-collapse:collapse;}
+.a-table th{font-size:.56rem;letter-spacing:3px;color:var(--gold);padding:10px 14px;text-align:left;border-bottom:1px solid rgba(174,150,102,.25);}
+.a-table td{padding:12px 14px;font-size:.75rem;letter-spacing:.5px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;}
+.a-table tr:hover td{background:rgba(174,150,102,.03);}
+.prod-emoji-cell{font-size:1.6rem;}
+.inline-fi{background:none;border:none;border-bottom:1px solid rgba(174,150,102,.35);color:var(--white);padding:4px 6px;font-family:'Josefin Sans',sans-serif;font-size:.75rem;outline:none;width:100%;letter-spacing:.5px;}
+.btn-sm{background:none;border:1px solid rgba(174,150,102,.3);color:var(--gold);padding:5px 14px;font-family:'Josefin Sans',sans-serif;font-size:.58rem;letter-spacing:1px;cursor:pointer;transition:all .3s;}
+.btn-sm:hover{background:rgba(174,150,102,.08);}
+.btn-sm.save{border-color:#4CAF50;color:#4CAF50;display:none;}
+.btn-sm.save:hover{background:rgba(76,175,80,.08);}
+.btn-sm.del{border-color:#f44336;color:#f44336;}
+.btn-sm.del:hover{background:rgba(244,67,54,.08);}
+
+/* ── DISCOUNT / PROMO ── */
+.card-box{background:var(--black-card);border:1px solid rgba(174,150,102,.15);padding:2rem;margin-bottom:1.5rem;}
+.card-box h3{font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:3px;color:var(--gold);margin-bottom:1.5rem;}
+.input-row{display:flex;gap:.8rem;align-items:flex-end;flex-wrap:wrap;}
+.input-group{display:flex;flex-direction:column;}
+.input-group label{font-size:.56rem;letter-spacing:2px;color:var(--gray);margin-bottom:6px;}
+.a-input{background:rgba(255,255,255,.03);border:1px solid rgba(174,150,102,.25);color:var(--white);padding:8px 14px;font-family:'Josefin Sans',sans-serif;font-size:.78rem;outline:none;letter-spacing:1px;transition:border-color .3s;}
+.a-input:focus{border-color:var(--gold);}
+.btn-gold{background:var(--gold);color:var(--black);border:none;padding:9px 24px;font-family:'Josefin Sans',sans-serif;font-size:.62rem;letter-spacing:3px;cursor:pointer;transition:background .3s;}
+.btn-gold:hover{background:var(--gold-light);}
+.btn-ghost{background:none;border:1px solid rgba(174,150,102,.3);color:var(--gold);padding:9px 20px;font-family:'Josefin Sans',sans-serif;font-size:.62rem;letter-spacing:2px;cursor:pointer;transition:all .3s;}
+.btn-ghost:hover{background:rgba(174,150,102,.06);}
+.code-list{margin-top:1.2rem;}
+.code-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.72rem;letter-spacing:.5px;}
+.code-name{color:var(--gold);font-weight:400;}
+.current-disc{font-size:.68rem;color:#4CAF50;letter-spacing:1px;margin-top:.8rem;}
+
+/* ── TEXTS EDITOR ── */
+.text-editor textarea{width:100%;background:rgba(255,255,255,.02);border:1px solid rgba(174,150,102,.2);color:var(--white);padding:12px 14px;font-family:'Josefin Sans',sans-serif;font-size:.75rem;line-height:1.8;outline:none;resize:vertical;min-height:100px;transition:border-color .3s;letter-spacing:.5px;}
+.text-editor textarea:focus{border-color:var(--gold);}
+.text-field{margin-bottom:1.3rem;}
+.text-field label{display:block;font-size:.56rem;letter-spacing:3px;color:var(--gold);margin-bottom:.6rem;}
+
+/* ── IMAGE UPLOAD ── */
+.img-upload-area{border:1px dashed rgba(174,150,102,.35);padding:2rem;text-align:center;cursor:pointer;transition:border-color .3s;background:rgba(174,150,102,.02);}
+.img-upload-area:hover{border-color:var(--gold);}
+.img-upload-area p{font-size:.65rem;letter-spacing:2px;color:var(--gray);margin-top:.5rem;}
+.img-upload-area input{display:none;}
+.img-preview{max-width:120px;max-height:120px;margin-bottom:.5rem;border:1px solid rgba(174,150,102,.2);}
+
+/* ── ADD PRODUCT ── */
+.add-form{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:700px){.add-form{grid-template-columns:1fr;}.admin-layout{grid-template-columns:1fr;}.sidebar{height:auto;position:relative;}}
+
+/* ── USERS TABLE ── */
+.user-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.72rem;letter-spacing:.5px;flex-wrap:wrap;gap:.5rem;}
+.user-email{color:var(--white);}
+.user-date{color:var(--gray);font-size:.6rem;}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;z-index:3000;background:var(--black-card);border:1px solid var(--gold);padding:.9rem 1.4rem;font-size:.65rem;letter-spacing:2px;color:var(--gold);transform:translateY(100px);opacity:0;transition:all .4s;pointer-events:none;}
+.toast.on{transform:translateY(0);opacity:1;}
+</style>
+</head>
+<body>
+
+<!-- Loading -->
+<div class="screen" id="loadScreen">
+  <div class="spinner"></div>
+  <p>ADMIN PANEL WIRD GELADEN …</p>
+</div>
+
+<!-- Admin Login -->
+<div class="admin-login" id="adminLoginScreen">
+  <div class="al-box">
+    <div class="al-icon">⚙</div>
+    <h1 class="al-title">ADMIN</h1>
+    <p class="al-sub" id="loginSubtitle">ZUGANG NUR FÜR BERECHTIGTE PERSONEN</p>
+
+    <!-- First time: show register form -->
+    <div id="adminRegisterForm" style="display:none">
+      <p class="first-time-note"><strong>Erstmalige Admin-Einrichtung</strong><br>
+      Es wurde noch kein Admin registriert. Erstellen Sie jetzt Ihren einmaligen Admin-Account. Danach ist keine weitere Admin-Registrierung möglich.</p>
+      <br>
+      <div class="fg">
+        <label class="fl">E-MAIL</label>
+        <input class="fi" id="arEmail" type="email" placeholder="admin@ihre-domain.de">
+      </div>
+      <div class="fg">
+        <label class="fl">PASSWORT (min. 8 Zeichen)</label>
+        <input class="fi" id="arPass" type="password" placeholder="Sicheres Passwort wählen">
+      </div>
+      <div class="fg">
+        <label class="fl">PASSWORT BESTÄTIGEN</label>
+        <input class="fi" id="arPass2" type="password" placeholder="Passwort wiederholen">
+      </div>
+      <button class="fb" id="arBtn" onclick="createAdmin()">ADMIN-KONTO ERSTELLEN</button>
+      <p class="fmsg" id="arMsg"></p>
+    </div>
+
+    <!-- Normal login -->
+    <div id="adminLoginForm">
+      <div class="fg">
+        <label class="fl">E-MAIL</label>
+        <input class="fi" id="alEmail" type="email" placeholder="admin@chevalier-roth.de" autocomplete="username">
+      </div>
+      <div class="fg">
+        <label class="fl">PASSWORT</label>
+        <input class="fi" id="alPass" type="password" placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <button class="fb" id="alBtn" onclick="adminLogin()">EINLOGGEN</button>
+      <p class="fmsg" id="alMsg"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel" style="display:none">
+  <div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="lt">Chevalier &amp; Roth</div>
+        <small>MAISON DE MODE</small>
+        <div class="sidebar-badge">⚙ ADMIN</div>
+      </div>
+      <nav class="s-nav" id="sNav">
+        <a class="active" onclick="showTab('dashboard',this)"><span>◈</span> DASHBOARD</a>
+        <a onclick="showTab('products',this)"><span>👗</span> PRODUKTE</a>
+        <a onclick="showTab('add-product',this)"><span>＋</span> PRODUKT HINZUFÜGEN</a>
+        <a onclick="showTab('images',this)"><span>🖼</span> BILDER</a>
+        <a onclick="showTab('discounts',this)"><span>%</span> RABATTE</a>
+        <a onclick="showTab('codes',this)"><span>🎟</span> AKTIONSCODES</a>
+        <a onclick="showTab('texts',this)"><span>✎</span> TEXTE</a>
+        <a onclick="showTab('users',this)"><span>👤</span> NUTZER</a>
+        <div class="divider"></div>
+        <a href="index.html" target="_blank"><span>↗</span> SHOP ANSEHEN</a>
+      </nav>
+      <button class="sidebar-logout" onclick="adminLogout()">ABMELDEN</button>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="admin-main">
+
+      <!-- DASHBOARD -->
+      <div class="panel active" id="tab-dashboard">
+        <div class="panel-header">
+          <div><h2 class="panel-title">DASHBOARD</h2><p class="panel-sub">Willkommen zurück im Admin-Panel</p></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-card"><div class="sc-num" id="dashProds">–</div><div class="sc-label">PRODUKTE</div></div>
+          <div class="stat-card"><div class="sc-num" id="dashUsers">–</div><div class="sc-label">REGISTRIERTE NUTZER</div></div>
+          <div class="stat-card"><div class="sc-num" id="dashCodes">–</div><div class="sc-label">AKTIONSCODES</div></div>
+          <div class="stat-card"><div class="sc-num" id="dashDisc">–</div><div class="sc-label">AKTIVER RABATT</div></div>
+        </div>
+        <div class="card-box">
+          <h3>SCHNELLÜBERSICHT</h3>
+          <p style="font-size:.72rem;line-height:2;color:#aaa">
+            Verwalten Sie alle Produkte, Preise, Rabatte und Aktionscodes über die linke Navigation.<br>
+            Produkt-Bilder können im Bereich „Bilder" hochgeladen werden.<br>
+            Texte (Hero, Philosophie) können im Bereich „Texte" bearbeitet werden.
+          </p>
+        </div>
+      </div>
+
+      <!-- PRODUCTS -->
+      <div class="panel" id="tab-products">
+        <div class="panel-header">
+          <div><h2 class="panel-title">PRODUKTE</h2><p class="panel-sub">Preise, Namen und Details bearbeiten</p></div>
+        </div>
+        <div class="table-wrap">
+          <table class="a-table">
+            <thead>
+              <tr>
+                <th>BILD</th><th>NAME</th><th>KATEGORIE</th><th>PREIS (€)</th><th>ORIGINALPREIS</th><th>AKTIONEN</th>
+              </tr>
+            </thead>
+            <tbody id="prodTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ADD PRODUCT -->
+      <div class="panel" id="tab-add-product">
+        <div class="panel-header">
+          <div><h2 class="panel-title">PRODUKT HINZUFÜGEN</h2></div>
+        </div>
+        <div class="card-box">
+          <div class="add-form">
+            <div class="input-group">
+              <label>PRODUKTNAME</label>
+              <input class="a-input" id="npName" type="text" placeholder="z.B. Seidenschal Noir">
+            </div>
+            <div class="input-group">
+              <label>KATEGORIE</label>
+              <select class="a-input" id="npCat">
+                <option value="DAMEN">DAMEN</option>
+                <option value="HERREN">HERREN</option>
+                <option value="ACCESSOIRES">ACCESSOIRES</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label>PREIS (€)</label>
+              <input class="a-input" id="npPrice" type="number" placeholder="199">
+            </div>
+            <div class="input-group">
+              <label>EMOJI / PLATZHALTER</label>
+              <input class="a-input" id="npEmoji" type="text" placeholder="👗" maxlength="4">
+            </div>
+            <div class="input-group">
+              <label>PRODUKT-LINK (HTML)</label>
+              <input class="a-input" id="npLink" type="text" placeholder="produkt-4.html">
+            </div>
+            <div class="input-group">
+              <label>BESCHREIBUNG</label>
+              <input class="a-input" id="npDesc" type="text" placeholder="Kurze Beschreibung...">
+            </div>
+          </div>
+          <br>
+          <button class="btn-gold" onclick="addProduct()" style="margin-top:.5rem">PRODUKT HINZUFÜGEN</button>
+          <p class="fmsg" id="npMsg"></p>
+        </div>
+      </div>
+
+      <!-- IMAGES -->
+      <div class="panel" id="tab-images">
+        <div class="panel-header">
+          <div><h2 class="panel-title">BILDER</h2><p class="panel-sub">Produktbilder und Logo verwalten</p></div>
+        </div>
+        <div class="card-box">
+          <h3>LOGO</h3>
+          <p style="font-size:.72rem;color:#aaa;line-height:1.9;margin-bottom:1rem">
+            Speichern Sie Ihr Logo als <strong style="color:var(--gold)">logo.png</strong> im selben Ordner wie alle HTML-Dateien. Es erscheint automatisch oben auf jeder Seite.<br>
+            Empfohlen: transparenter Hintergrund, ca. 200×80 px, PNG oder SVG.
+          </p>
+          <div class="img-upload-area" onclick="document.getElementById('logoFile').click()">
+            <div style="font-size:2rem">🖼</div>
+            <p>LOGO AUSWÄHLEN (logo.png)</p>
+            <input type="file" id="logoFile" accept="image/*" onchange="previewImg(this,'logoPreview')">
+          </div>
+          <img id="logoPreview" class="img-preview" style="display:none;margin-top:1rem">
+        </div>
+        <div class="card-box">
+          <h3>PRODUKTBILDER</h3>
+          <p style="font-size:.72rem;color:#aaa;line-height:1.9;margin-bottom:1.2rem">
+            Benennen Sie Ihre Produktbilder nach dem Schema:<br>
+            <strong style="color:var(--gold)">produkt-1.jpg</strong>, <strong style="color:var(--gold)">produkt-2.jpg</strong>, <strong style="color:var(--gold)">produkt-3.jpg</strong> usw.<br>
+            Legen Sie diese Dateien in denselben Ordner wie die HTML-Dateien. Die Produktseiten laden sie automatisch.<br>
+            Empfohlen: Verhältnis 3:4 (Hochformat), min. 800×1060 px, JPG oder WebP.
+          </p>
+          <div class="img-upload-area" onclick="document.getElementById('prodFile').click()">
+            <div style="font-size:2rem">📸</div>
+            <p>PRODUKTBILD VORSCHAUEN</p>
+            <input type="file" id="prodFile" accept="image/*" onchange="previewImg(this,'prodPreview')">
+          </div>
+          <img id="prodPreview" class="img-preview" style="display:none;margin-top:1rem">
+        </div>
+      </div>
+
+      <!-- DISCOUNTS -->
+      <div class="panel" id="tab-discounts">
+        <div class="panel-header">
+          <div><h2 class="panel-title">RABATTE</h2><p class="panel-sub">Globaler Rabatt auf alle Produkte</p></div>
+        </div>
+        <div class="card-box">
+          <h3>GLOBALER RABATT</h3>
+          <div class="input-row">
+            <div class="input-group">
+              <label>RABATT IN %</label>
+              <input class="a-input" id="discInput" type="number" min="0" max="90" placeholder="z.B. 20" style="width:120px">
+            </div>
+            <button class="btn-gold" onclick="setDiscount()">RABATT SETZEN</button>
+            <button class="btn-ghost" onclick="removeDiscount()">ENTFERNEN</button>
+          </div>
+          <p class="current-disc" id="currentDiscLabel"></p>
+        </div>
+        <div class="card-box">
+          <h3>EINZELNE PRODUKTRABATTE</h3>
+          <p style="font-size:.72rem;color:#aaa;line-height:1.9">Bearbeiten Sie einzelne Produktpreise direkt in der Produkttabelle unter „Produkte".</p>
+        </div>
+      </div>
+
+      <!-- PROMO CODES -->
+      <div class="panel" id="tab-codes">
+        <div class="panel-header">
+          <div><h2 class="panel-title">AKTIONSCODES</h2></div>
+        </div>
+        <div class="card-box">
+          <h3>NEUEN CODE ERSTELLEN</h3>
+          <div class="input-row">
+            <div class="input-group">
+              <label>CODE</label>
+              <input class="a-input" id="codeInput" type="text" placeholder="z.B. SUMMER25" style="text-transform:uppercase;width:160px">
+            </div>
+            <div class="input-group">
+              <label>RABATT %</label>
+              <input class="a-input" id="codePercent" type="number" min="1" max="90" placeholder="15" style="width:80px">
+            </div>
+            <button class="btn-gold" onclick="addCode()">ERSTELLEN</button>
+          </div>
+          <p class="fmsg" id="codeMsg"></p>
+        </div>
+        <div class="card-box">
+          <h3>AKTIVE CODES</h3>
+          <div class="code-list" id="codeList"></div>
+        </div>
+      </div>
+
+      <!-- TEXTS -->
+      <div class="panel" id="tab-texts">
+        <div class="panel-header">
+          <div><h2 class="panel-title">TEXTE BEARBEITEN</h2></div>
+        </div>
+        <div class="card-box text-editor">
+          <h3>HERO BEREICH</h3>
+          <div class="text-field">
+            <label>EYEBROW TEXT</label>
+            <textarea id="txtEyebrow" rows="1">KOLLEKTION 2025 – JETZT VERFÜGBAR</textarea>
+          </div>
+          <div class="text-field">
+            <label>UNTERTITEL</label>
+            <textarea id="txtSub" rows="1">HAUTE COUTURE · BERLIN · SEIT 2018</textarea>
+          </div>
+        </div>
+        <div class="card-box text-editor">
+          <h3>PHILOSOPHIE BEREICH</h3>
+          <div class="text-field">
+            <label>ABSCHNITT 1</label>
+            <textarea id="txtPhil1" rows="3">Chevalier & Roth wurde mit einer klaren Vision gegründet: Mode zu erschaffen, die nicht nur beautiful, sondern dauerhaft ist. Jedes Stück wird in kleinen Auflagen gefertigt.</textarea>
+          </div>
+          <div class="text-field">
+            <label>ZITAT</label>
+            <textarea id="txtQuote" rows="2">„Wahre Eleganz ist die Ablehnung des Überflüssigen."</textarea>
+          </div>
+          <div class="text-field">
+            <label>ABSCHNITT 2</label>
+            <textarea id="txtPhil2" rows="3">Unsere Materialien werden direkt von europäischen Webereien bezogen. Jede Naht, jeder Knopf, jedes Detail mit derselben Hingabe.</textarea>
+          </div>
+        </div>
+        <button class="btn-gold" onclick="saveTexts()">TEXTE SPEICHERN</button>
+        <p class="fmsg" id="textMsg"></p>
+      </div>
+
+      <!-- USERS -->
+      <div class="panel" id="tab-users">
+        <div class="panel-header">
+          <div><h2 class="panel-title">NUTZER</h2><p class="panel-sub">Registrierte Kundenkonten</p></div>
+        </div>
+        <div class="card-box">
+          <h3>REGISTRIERTE NUTZER (APPWRITE)</h3>
+          <p style="font-size:.72rem;color:#aaa;line-height:1.9;margin-bottom:1rem">
+            Alle Nutzer können direkt in der <a href="https://cloud.appwrite.io" target="_blank" style="color:var(--gold)">Appwrite Konsole</a> unter Auth → Users eingesehen, bearbeitet oder gelöscht werden.
+          </p>
+          <a href="https://cloud.appwrite.io" target="_blank" class="btn-gold" style="display:inline-block;text-decoration:none">APPWRITE KONSOLE ÖFFNEN →</a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ════════════════════════════════
+//  APPWRITE
+// ════════════════════════════════
+const AW_ENDPOINT   = "https://fra.cloud.appwrite.io/v1";
+const AW_PROJECT_ID = "6a2bef64001707bac3a9";
+const _client = new Appwrite.Client().setEndpoint(AW_ENDPOINT).setProject(AW_PROJECT_ID);
+const _account = new Appwrite.Account(_client);
+
+// Admin UID stored after first registration
+const ADMIN_UID_KEY = "crAdminUID";
+
+let adminUser = null;
+let products  = JSON.parse(localStorage.getItem('crProducts') || JSON.stringify([
+  {id:"p1",emoji:"👗",name:"Abendkleid Noir",cat:"DAMEN",price:389,origPrice:389,link:"produkt-1.html"},
+  {id:"p2",emoji:"🥿",name:"Klassische Pumps",cat:"DAMEN",price:229,origPrice:229,link:"produkt-2.html"},
+  {id:"p3",emoji:"👜",name:"Leder Clutch",cat:"ACCESSOIRES",price:159,origPrice:159,link:"produkt-3.html"},
+  {id:"p4",emoji:"🧥",name:"Cashmere Mantel",cat:"HERREN",price:649,origPrice:649,link:"#"},
+  {id:"p5",emoji:"👔",name:"Seidenkrawatte",cat:"HERREN",price:89,origPrice:89,link:"#"},
+  {id:"p6",emoji:"⌚",name:"Goldene Uhr",cat:"ACCESSOIRES",price:1290,origPrice:1290,link:"#"},
+]));
+let promoCodes = JSON.parse(localStorage.getItem('crPromoCodes') || '[{"code":"WELCOME10","percent":10}]');
+let globalDisc = parseFloat(localStorage.getItem('crDiscount') || '0');
+const adminUID = localStorage.getItem(ADMIN_UID_KEY);
+
+// ════════════════════════════════
+//  INIT
+// ════════════════════════════════
+async function init(){
+  try {
+    const u = await _account.get();
+    // Check this user is the registered admin
+    if(adminUID && u.$id === adminUID){
+      adminUser = u;
+      document.getElementById('loadScreen').classList.add('hidden');
+      document.getElementById('adminLoginScreen').classList.add('hidden');
+      document.getElementById('adminPanel').style.display = 'block';
+      loadDashboard(); renderProducts(); renderCodes(); updateDiscLabel();
+    } else {
+      // logged in as normal user, not admin → log out and show login
+      await _account.deleteSession('current');
+      showLoginScreen();
+    }
+  } catch(e){
+    showLoginScreen();
+  }
+}
+
+function showLoginScreen(){
+  document.getElementById('loadScreen').classList.add('hidden');
+  document.getElementById('adminLoginScreen').style.display = 'flex';
+  // If no admin registered yet → show registration form
+  if(!adminUID){
+    document.getElementById('adminLoginForm').style.display = 'none';
+    document.getElementById('adminRegisterForm').style.display = 'block';
+    document.getElementById('loginSubtitle').textContent = 'ADMIN EINRICHTEN (EINMALIG)';
+  }
+}
+
+// ════════════════════════════════
+//  ADMIN FIRST-TIME REGISTRATION
+// ════════════════════════════════
+async function createAdmin(){
+  const email = document.getElementById('arEmail').value.trim();
+  const pass  = document.getElementById('arPass').value;
+  const pass2 = document.getElementById('arPass2').value;
+  const msg   = document.getElementById('arMsg');
+  const btn   = document.getElementById('arBtn');
+  if(!email||!pass||!pass2){ msg.style.color='#f44336'; msg.textContent='Alle Felder ausfüllen'; return; }
+  if(pass!==pass2){ msg.style.color='#f44336'; msg.textContent='✗ Passwörter stimmen nicht überein'; return; }
+  if(pass.length<8){ msg.style.color='#f44336'; msg.textContent='✗ Mindestens 8 Zeichen'; return; }
+  btn.textContent='WIRD ERSTELLT...'; btn.disabled=true;
+  try {
+    const u = await _account.create(Appwrite.ID.unique(), email, pass, 'Admin');
+    // Store UID so no other admin can register
+    localStorage.setItem(ADMIN_UID_KEY, u.$id);
+    await _account.createEmailPasswordSession(email, pass);
+    adminUser = await _account.get();
+    msg.style.color='#4CAF50'; msg.textContent='✓ Admin-Konto erstellt!';
+    setTimeout(()=>{
+      document.getElementById('adminLoginScreen').classList.add('hidden');
+      document.getElementById('adminPanel').style.display='block';
+      loadDashboard(); renderProducts(); renderCodes(); updateDiscLabel();
+    },800);
+  } catch(e){
+    msg.style.color='#f44336';
+    if(e.code===409) msg.textContent='✗ Diese E-Mail ist bereits registriert';
+    else msg.textContent='Fehler: '+e.message;
+    btn.textContent='ADMIN-KONTO ERSTELLEN'; btn.disabled=false;
+  }
+}
+
+// ════════════════════════════════
+//  ADMIN LOGIN
+// ════════════════════════════════
+async function adminLogin(){
+  const email = document.getElementById('alEmail').value.trim();
+  const pass  = document.getElementById('alPass').value;
+  const msg   = document.getElementById('alMsg');
+  const btn   = document.getElementById('alBtn');
+  if(!email||!pass){ msg.style.color='#f44336'; msg.textContent='Felder ausfüllen'; return; }
+  btn.textContent='ANMELDEN...'; btn.disabled=true;
+  try {
+    await _account.createEmailPasswordSession(email, pass);
+    const u = await _account.get();
+    if(!adminUID || u.$id !== adminUID){
+      await _account.deleteSession('current');
+      msg.style.color='#f44336'; msg.textContent='✗ Kein Admin-Zugang für dieses Konto';
+      btn.textContent='EINLOGGEN'; btn.disabled=false;
+      return;
+    }
+    adminUser = u;
+    document.getElementById('adminLoginScreen').classList.add('hidden');
+    document.getElementById('adminPanel').style.display='block';
+    loadDashboard(); renderProducts(); renderCodes(); updateDiscLabel();
+  } catch(e){
+    msg.style.color='#f44336';
+    if(e.code===401) msg.textContent='✗ E-Mail oder Passwort falsch';
+    else msg.textContent='Fehler: '+e.message;
+    btn.textContent='EINLOGGEN'; btn.disabled=false;
+  }
+}
+
+async function adminLogout(){
+  try{ await _account.deleteSession('current'); }catch(e){}
+  location.reload();
+}
+
+// ════════════════════════════════
+//  DASHBOARD
+// ════════════════════════════════
+function loadDashboard(){
+  document.getElementById('dashProds').textContent  = products.length;
+  document.getElementById('dashCodes').textContent  = promoCodes.length;
+  document.getElementById('dashDisc').textContent   = globalDisc>0 ? globalDisc+'%' : 'KEIN';
+  document.getElementById('dashUsers').textContent  = '→ Appwrite';
+}
+
+// ════════════════════════════════
+//  PRODUCTS
+// ════════════════════════════════
+function saveProducts(){ localStorage.setItem('crProducts', JSON.stringify(products)); }
+
+function renderProducts(){
+  const tb = document.getElementById('prodTableBody');
+  tb.innerHTML = products.map((p,i)=>`
+    <tr id="tr-${i}">
+      <td class="prod-emoji-cell"><span id="em-${i}">${p.emoji}</span></td>
+      <td><span id="nm-${i}">${p.name}</span></td>
+      <td><span id="ct-${i}">${p.cat}</span></td>
+      <td><span id="pr-${i}">€ ${p.price}</span></td>
+      <td><span id="op-${i}">€ ${p.origPrice}</span></td>
+      <td style="display:flex;gap:.4rem;flex-wrap:wrap">
+        <button class="btn-sm" id="editBtn-${i}" onclick="editRow(${i})">BEARBEITEN</button>
+        <button class="btn-sm save" id="saveBtn-${i}" onclick="saveRow(${i})">SPEICHERN</button>
+        <button class="btn-sm del" onclick="deleteProduct(${i})">LÖSCHEN</button>
+      </td>
+    </tr>`).join('');
+}
+
+function editRow(i){
+  const p=products[i];
+  document.getElementById(`em-${i}`).innerHTML = `<input class="inline-fi" id="ei-em-${i}" value="${p.emoji}" style="width:50px">`;
+  document.getElementById(`nm-${i}`).innerHTML = `<input class="inline-fi" id="ei-nm-${i}" value="${p.name}">`;
+  document.getElementById(`ct-${i}`).innerHTML = `<input class="inline-fi" id="ei-ct-${i}" value="${p.cat}" style="width:100px">`;
+  document.getElementById(`pr-${i}`).innerHTML = `<input class="inline-fi" id="ei-pr-${i}" value="${p.price}" type="number" style="width:80px">`;
+  document.getElementById(`op-${i}`).innerHTML = `<input class="inline-fi" id="ei-op-${i}" value="${p.origPrice}" type="number" style="width:80px">`;
+  document.getElementById(`editBtn-${i}`).style.display='none';
+  document.getElementById(`saveBtn-${i}`).style.display='inline-block';
+}
+
+function saveRow(i){
+  products[i].emoji     = document.getElementById(`ei-em-${i}`).value;
+  products[i].name      = document.getElementById(`ei-nm-${i}`).value;
+  products[i].cat       = document.getElementById(`ei-ct-${i}`).value.toUpperCase();
+  products[i].price     = parseFloat(document.getElementById(`ei-pr-${i}`).value)||products[i].price;
+  products[i].origPrice = parseFloat(document.getElementById(`ei-op-${i}`).value)||products[i].origPrice;
+  saveProducts(); renderProducts(); loadDashboard();
+  showToast('Produkt gespeichert ✦');
+}
+
+function deleteProduct(i){
+  if(!confirm('Produkt "'+products[i].name+'" wirklich löschen?')) return;
+  products.splice(i,1);
+  saveProducts(); renderProducts(); loadDashboard();
+  showToast('Produkt gelöscht');
+}
+
+function addProduct(){
+  const name  = document.getElementById('npName').value.trim();
+  const cat   = document.getElementById('npCat').value;
+  const price = parseFloat(document.getElementById('npPrice').value);
+  const emoji = document.getElementById('npEmoji').value.trim() || '👗';
+  const link  = document.getElementById('npLink').value.trim() || '#';
+  const msg   = document.getElementById('npMsg');
+  if(!name||!price){ msg.style.color='#f44336'; msg.textContent='Name und Preis erforderlich'; return; }
+  const newP = {id:'p'+Date.now(),emoji,name,cat,price,origPrice:price,link};
+  products.push(newP);
+  saveProducts(); loadDashboard(); renderProducts();
+  msg.style.color='#4CAF50'; msg.textContent='✓ Produkt hinzugefügt';
+  ['npName','npPrice','npEmoji','npLink'].forEach(id=>document.getElementById(id).value='');
+  showToast('Produkt hinzugefügt ✦');
+}
+
+// ════════════════════════════════
+//  DISCOUNT
+// ════════════════════════════════
+function setDiscount(){
+  const v = parseFloat(document.getElementById('discInput').value);
+  if(isNaN(v)||v<0||v>90){ showToast('Ungültiger Wert'); return; }
+  globalDisc = v;
+  products.forEach(p=>{ p.price = Math.round(p.origPrice*(1-v/100)); });
+  localStorage.setItem('crDiscount', v);
+  saveProducts(); updateDiscLabel(); loadDashboard();
+  showToast(v+'% Rabatt auf alle Produkte aktiv ✦');
+}
+function removeDiscount(){
+  globalDisc=0;
+  products.forEach(p=>{ p.price=p.origPrice; });
+  localStorage.setItem('crDiscount','0');
+  saveProducts(); updateDiscLabel(); loadDashboard();
+  showToast('Rabatt entfernt');
+}
+function updateDiscLabel(){
+  const el=document.getElementById('currentDiscLabel');
+  if(el) el.textContent = globalDisc>0 ? '✓ Aktueller Rabatt: '+globalDisc+'% auf alle Produkte' : 'Kein aktiver globaler Rabatt';
+}
+
+// ════════════════════════════════
+//  PROMO CODES
+// ════════════════════════════════
+function saveCodes(){ localStorage.setItem('crPromoCodes', JSON.stringify(promoCodes)); }
+function renderCodes(){
+  const el=document.getElementById('codeList');
+  if(!promoCodes.length){ el.innerHTML='<p style="font-size:.7rem;color:var(--gray);letter-spacing:1px">Keine Codes vorhanden</p>'; return; }
+  el.innerHTML = promoCodes.map(c=>`
+    <div class="code-row">
+      <span><span class="code-name">${c.code}</span> &nbsp;–&nbsp; ${c.percent}% Rabatt</span>
+      <button class="btn-sm del" onclick="deleteCode('${c.code}')">× LÖSCHEN</button>
+    </div>`).join('');
+}
+function addCode(){
+  const code    = document.getElementById('codeInput').value.trim().toUpperCase();
+  const percent = parseFloat(document.getElementById('codePercent').value);
+  const msg     = document.getElementById('codeMsg');
+  if(!code||isNaN(percent)||percent<1||percent>90){ msg.style.color='#f44336'; msg.textContent='Ungültige Eingabe'; return; }
+  if(promoCodes.find(c=>c.code===code)){ msg.style.color='#f44336'; msg.textContent='Code bereits vorhanden'; return; }
+  promoCodes.push({code,percent});
+  saveCodes(); renderCodes(); loadDashboard();
+  msg.style.color='#4CAF50'; msg.textContent='✓ Code '+code+' erstellt';
+  document.getElementById('codeInput').value='';
+  document.getElementById('codePercent').value='';
+  showToast('Code '+code+' erstellt ✦');
+}
+function deleteCode(code){
+  promoCodes = promoCodes.filter(c=>c.code!==code);
+  saveCodes(); renderCodes(); loadDashboard();
+  showToast('Code gelöscht');
+}
+
+// ════════════════════════════════
+//  TEXTS
+// ════════════════════════════════
+function saveTexts(){
+  const texts = {
+    eyebrow: document.getElementById('txtEyebrow').value,
+    sub:     document.getElementById('txtSub').value,
+    phil1:   document.getElementById('txtPhil1').value,
+    quote:   document.getElementById('txtQuote').value,
+    phil2:   document.getElementById('txtPhil2').value,
+  };
+  localStorage.setItem('crTexts', JSON.stringify(texts));
+  document.getElementById('textMsg').style.color='#4CAF50';
+  document.getElementById('textMsg').textContent='✓ Texte gespeichert (werden beim nächsten Laden der index.html angezeigt)';
+  showToast('Texte gespeichert ✦');
+}
+function loadTexts(){
+  const t = JSON.parse(localStorage.getItem('crTexts')||'{}');
+  if(t.eyebrow) document.getElementById('txtEyebrow').value=t.eyebrow;
+  if(t.sub)     document.getElementById('txtSub').value=t.sub;
+  if(t.phil1)   document.getElementById('txtPhil1').value=t.phil1;
+  if(t.quote)   document.getElementById('txtQuote').value=t.quote;
+  if(t.phil2)   document.getElementById('txtPhil2').value=t.phil2;
+}
+
+// ════════════════════════════════
+//  IMAGE PREVIEW
+// ════════════════════════════════
+function previewImg(input, previewId){
+  const file = input.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e=>{
+    const img = document.getElementById(previewId);
+    img.src = e.target.result; img.style.display='block';
+  };
+  reader.readAsDataURL(file);
+}
+
+// ════════════════════════════════
+//  NAVIGATION
+// ════════════════════════════════
+function showTab(id, el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.s-nav a').forEach(a=>a.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  if(el) el.classList.add('active');
+  if(id==='texts') loadTexts();
+}
+
+// ════════════════════════════════
+//  TOAST
+// ════════════════════════════════
+function showToast(m){
+  const t=document.getElementById('toast');
+  t.textContent=m; t.classList.add('on');
+  setTimeout(()=>t.classList.remove('on'),3200);
+}
+
+init();
+</script>
+</body>
+</html>
